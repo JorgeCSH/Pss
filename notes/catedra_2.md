@@ -101,5 +101,5 @@ Finalmente
 
 ---
 [^1]: *char es un numero que puede representar caracteres tambien, de manera general, representa caracteres (complicaciones con ASCII). En ASCII todos los caracteres son (o deberian ser) numeros positivos.*
-[2]: **Este no estoy seguro xd**
+[^2]: **Este no estoy seguro xd**
 [^3]: **Creo que solo cuando se resta 1 (POR AHORA)**
