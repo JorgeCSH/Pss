@@ -97,7 +97,24 @@ Donde los condicionales tambien tienen lo que realizaran en parentesis.
 |i += n| i -= n |i *= n | |
 | |i--[^3] | | |
 
-Finalmente
+Finalmente, la representabilidad (o como se escriba) de valores se puede representar numericamente desde:
+
+|Entero c/s | Maquina de 64 bits| tamaño|
+|-|-|-|
+| char | $[-2^7, 2^7[$ |1 byte |
+| short | $[-2^{15}, 2^{15}[$|2 bytes |
+| int| $[-2^{31}, 2^{31}[$|4 bytes |
+|long | $[-2^{63}, 2^{63}[$| 8 bytes (4 si es de 32 bits)|
+| long long | $[-2^{63}, 2^{63}[$| 8 bytes|
+|Entero s/s | Maquina de 64 bits| tamaño|
+|-|-|-|
+| unsigned char | $[0, 2^8[$ |1 byte |
+| unsigned short | $[0, 2^{16}[$|2 bytes |
+| unsigned int| $[0, 2^{32}[$|4 bytes |
+| unsigned long | $[0, 2^{64}[$| 8 bytes (4 si es de 32 bits)|
+| unsigned long long | $[0, 2^{64}[$| 8 bytes|
+
+En `c`, si llegamos a un valor que tenga un tamaño mayor al de la representabilididad, `c` no falla pero si tiene un overflow.
 
 ---
 [^1]: *char es un numero que puede representar caracteres tambien, de manera general, representa caracteres (complicaciones con ASCII). En ASCII todos los caracteres son (o deberian ser) numeros positivos.*
