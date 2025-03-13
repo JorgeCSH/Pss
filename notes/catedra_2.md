@@ -69,7 +69,37 @@ int factorial(int n) {
 }
 ```
 
-Para hacer una funcion en `c` debemos empezar con el tipo que queremos que retorne, y en los valores que recibe tambien debemos declarar los tipos. En las funciones, en vez de jerarquia por tabs, tenemos jerarquia por brackets.
+Para hacer una funcion en `c` debemos empezar con el tipo que queremos que retorne, y en los valores que recibe tambien debemos declarar los tipos. En las funciones, en vez de jerarquia por tabs, tenemos jerarquia por brackets. IMPORTANTE: finalizar cada linea con el semicol (*y si, se puede hacer un codigo entero en una sola linea xd*).
+
+Ahora, intentemos usando los "booleanos" de `c`:
+
+``` c
+int factorial(int n) {
+  int res = 1;
+  // while 1 es como un while true
+  while(1) {
+    // Para esto tenemos que usar condiciones de quiebre, esto con condiciones
+    if (n == 0) {
+      break;
+    }
+    res = res*n;
+    n = n-1;
+  }
+}
+```
+
+Donde los condicionales tambien tienen lo que realizaran en parentesis.
+
+`c` puede escribirse de forma abreviada, donde algunas operaciones pueden ser reescritas como la operacion antes del igual (**como en python**). De esta forma:
+
+|i = i + n | i = i - 1| i = i * n| i = i / n[^2]|
+|-|-|-|-|
+|i += n| i -= n |i *= n | |
+| |i--[^3] | | |
+
+Finalmente
 
 ---
 [^1]: *char es un numero que puede representar caracteres tambien, de manera general, representa caracteres (complicaciones con ASCII). En ASCII todos los caracteres son (o deberian ser) numeros positivos.*
+[2]: **Este no estoy seguro xd**
+[^3]: **Creo que solo cuando se resta 1 (POR AHORA)**
