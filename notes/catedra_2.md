@@ -29,7 +29,24 @@ Formalmente:
 |Long |unsigned long | 8 bytes|
 | Long Long|unsigned long long | 8 bytes|
 
-Donde el tamaño de un byte esta dado por 8 bits (*aunque puede cambiar dependiendo de la arquitectura*). Para este ramo utilizaremos mas que nada `Int` y `Long`. Para el caso de enteros sin signo, se agrega el `unsigned`, esto para utilizar el bit mas significativo como parte del numero en vez del signo (**si no mal recuerdo el bit mas significativo corresponde al de mas a la izquierda...eso intente decir xd**).
+Donde el tamaño de un byte esta dado por 8 bits (*aunque puede cambiar dependiendo de la arquitectura*). Para este ramo utilizaremos mas que nada `Int` y `Long` *esto para los enteros*. Para el caso de enteros sin signo, se agrega el `unsigned`, esto para utilizar el bit mas significativo como parte del numero en vez del signo (**si no mal recuerdo el bit mas significativo corresponde al de mas a la izquierda...eso intente decir xd**).
+
+### Reales
+
+Existen dos tipos de formas para representar los reales (*asumiremos siempre con signo*):
+
+|Reles |Tamaño |
+|-|-|
+|double | 8 bytes |
+| float | 4 bytes |
+
+En los numeros reales, generalmente usaremos double *para irnos a la segura*.
+
+## Ordenamiento de tipos
+
+Los tipos pueden ser ordenados en tamaño, esto esta dado por:
+$char < short < int < long < long long < float < double$
+Siendo ordenado desde el que tiene menos bytes al que tiene mas bytes, donde los reales tienen una mayor jerarquia que los enteros. Esto es importante porque los tipos deben calzar para realizar las operaciones, si no **cosas feas pueden pasar**
 
 ---
 [^1]: *char es un numero que puede representar caracteres tambien, de manera general, representa caracteres (complicaciones con ASCII). En ASCII todos los caracteres son (o deberian ser) numeros positivos.*
