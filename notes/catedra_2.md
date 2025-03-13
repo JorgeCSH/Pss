@@ -45,7 +45,9 @@ En los numeros reales, generalmente usaremos double *para irnos a la segura*.
 ## Ordenamiento de tipos
 
 Los tipos pueden ser ordenados en tamaño, esto esta dado por:
+
 $char < short < int < long < long long < float < double$
+
 Siendo ordenado desde el que tiene menos bytes al que tiene mas bytes, donde los reales tienen una mayor jerarquia que los enteros. Esto es importante porque los tipos deben calzar para realizar las operaciones, si no **cosas feas pueden pasar**
 
 ---
