@@ -50,5 +50,26 @@ $char < short < int < long < long long < float < double$
 
 Siendo ordenado desde el que tiene menos bytes al que tiene mas bytes, donde los reales tienen una mayor jerarquia que los enteros. Esto es importante porque los tipos deben calzar para realizar las operaciones, si no **cosas feas pueden pasar**
 
+`C`, a diferencia de otros lenguajes como `python` no tiene tipos booleanos (`bool`). Para identificiar cual es cual se usan numeros, donde $0$ correspondera `false` mientras que cualquier (**literal cualquier otra wea parece**) sera un `true` (ejemplo: enteros que no sean $0$ o un `string`).
+
+Hagamos un ejemplo haciendo una funcion factorial en `C` ($n!$)
+
+```c
+// tipo nombre_funcion() {}
+int factorial(int n) {
+  // tipo nombre_de_variable = valor;
+  int res = 1;
+  while(n > 0) {
+    // como res ya lo declare, no es necesario re declararlo
+    res = res*n;
+    n = n - 1;
+  }
+  // retornamos como en python
+  return res;
+}
+```
+
+Para hacer una funcion en `c` debemos empezar con el tipo que queremos que retorne, y en los valores que recibe tambien debemos declarar los tipos. En las funciones, en vez de jerarquia por tabs, tenemos jerarquia por brackets.
+
 ---
 [^1]: *char es un numero que puede representar caracteres tambien, de manera general, representa caracteres (complicaciones con ASCII). En ASCII todos los caracteres son (o deberian ser) numeros positivos.*
