@@ -23,10 +23,13 @@ Formalmente:
 
 |Enteros (c/s)|Enteros (s/s)| Tamaño|
 |-|-|-|
-|Char | unsigned char| 1 byte |
+|Char[^1] | unsigned char| 1 byte |
 | Short | unsigned short |2 bytes |
 | Int| unsigned int| 4 bytes |
 |Long |unsigned long | 8 bytes|
 | Long Long|unsigned long long | 8 bytes|
 
 Donde el tamaño de un byte esta dado por 8 bits (*aunque puede cambiar dependiendo de la arquitectura*). Para este ramo utilizaremos mas que nada `Int` y `Long`. Para el caso de enteros sin signo, se agrega el `unsigned`, esto para utilizar el bit mas significativo como parte del numero en vez del signo (**si no mal recuerdo el bit mas significativo corresponde al de mas a la izquierda...eso intente decir xd**).
+
+---
+[^1]: *char es un numero que puede representar caracteres tambien, de manera general, representa caracteres (complicaciones con ASCII). En ASCII todos los caracteres son (o deberian ser) numeros positivos.*
