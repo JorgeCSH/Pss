@@ -1,3 +1,8 @@
+/*
+* This file exists to avoid having empty directories in the repository.
+*
+*/
+
 #include<stdio.h>
 
 // Dennis Ritchie version of Hello World
@@ -10,5 +15,6 @@ int main() {
     printf("hello, world");
     return 0;
 }
+
 
 
