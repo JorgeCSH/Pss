@@ -116,6 +116,37 @@ Finalmente, la representabilidad (o como se escriba) de valores se puede represe
 
 En `c`, si llegamos a un valor que tenga un tamaño mayor al de la representabilididad, `c` no falla pero si tiene un overflow.
 
+## Formas de definir enteros
+
+Los enteros, cuando creemos una variable, podemos deifnirla de 3 formas posibles:
+
+### Base 10 $(x)_{10}$
+
+Los numeros que nosotros conocemos (base decimal).
+
+``` c
+int a = 13;
+```
+
+### Base 8 $(x)_{8}$
+
+Los numeros en base 8, se le antepone un 0 (base octal).
+Como se pasa (recordar sistemas): pasarlo a bits, seccionarlo en 3 (agregar 0's al inicio si no es multiplo') y cada valor pasarlo a un valor en base 8.
+
+``` c
+int a = 013;
+```
+
+### Base 16 $(x)_{16}$
+
+Base hexadecimal, en `c` se le antepone un 0x. Para pasarlo de formato es como octal pero con 4 digitos.
+
+``` c
+int a = 0x13;
+```
+
+***IMPORTANTE, en `c` no existe forma de representar binario, `c` no trabaja en binarios.***
+
 ---
 [^1]: *char es un numero que puede representar caracteres tambien, de manera general, representa caracteres (complicaciones con ASCII). En ASCII todos los caracteres son (o deberian ser) numeros positivos.*
 [^2]: **Este no estoy seguro xd**
