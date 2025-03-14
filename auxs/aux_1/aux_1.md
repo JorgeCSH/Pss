@@ -80,5 +80,7 @@ int main(int argc, char* argv[]) {
 ### P2
 
 Buscamos que reciba un string que sea un binario y retorne como decimal. Para esto usaremos la ecuacion del binario, esto es con las potencias de dos, ejemplo:
+
 $(101010)_{2} = 1\cdot 2^{5} + 0\cdot 2^{4} + 1\cdot 2^{3} + 0\cdot 2^{2} + 1\cdot 2^{1} + 0\cdot 2^{0} = (42)_{10}$
+
 *Una cosa, un binario si termina en $0$ es par, mientras que si no, entonces es impar (o deberia)*
