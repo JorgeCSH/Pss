@@ -55,5 +55,16 @@ int b = 2.0 + 1 // La constante 2 la pasa a double, 1 que es entero es pasado a 
 
 Al trabajar con constantes, `c` las va a considerar segun el formato segun fue escrito, en donde los tipos de las constantes seran todos pasados al tipo de mayor prioridad y despues al de la variable
 
+4. Cast.
+
+``` c
+int a = 1;
+int b = 2;
+double c = (double)a/(double)b; // tambien servia (double)a/b y a/(double)b
+```
+
+Es una forma que tenemos para transformar tipos de forma temporal, esto es, decirle a `c` en un comando que transforme una variable a otro ormato para poder operarla, asi, si tomamos el ejemplo de la division entera, podemos poner un double entre `()` del inicio de cada variable para pdoer cambiar el tipo de manera temporal, para despues tomar el de la variable respectvia. Esto pued ehacerse en todas las partes, en una variable (recordar que se cambian todos los valores al tipo de mayor prioridad) haciendo un cast automatico al que pasamos.[^3]
+
 [^1]: Lo mejor es siempre parentizar **puto**.
 [^2]: `c` no es mañoso en temas de memoria ni debuggeo en caso de agregar o no parentesis **no deberia hacerse mas lentos en caso de agregar parentesis**.
+[^3]: Cuidado, la parentisacion tambien afecta la parentizacion, esto es, si tenemos algo de la forma `a/b + 1.5 = (a/b) + 1.5`. Donde `a/b` no es forzado a los tipos de formato de otras variables hasta que termine de calcular el parentesis, asi de tener `(1/2) + 1/5 = 1.5`. Nota: no se si afecta si no hay parentesis jeje.
