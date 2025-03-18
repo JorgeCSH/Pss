@@ -10,6 +10,7 @@ Tenemos diferentes reglas de parentizacion. La primera es la regla de precedenci
 | - | - |
 | `a+b*c`| `a+(b*c)`|
 | (a+b)*c | (a+b)*c |
+
 `C`, ademas de los operadores matematicos aritmeticos comunes, tenemos otros 50 y tanto con sus respectivod ordenes de precedencia que hay que considerar. Si no estamos seguros de l aprecedencia,lo mejor es usar parentesis manualmente. Algunos de estos operadores pueden ser:
 
 * `>>`: Operador binario para desplazar bits (exclusivo de `c`), la suma tiene mayor precenencia que el operador binario.
@@ -22,3 +23,17 @@ La segunda regla de parentizacion en `c` es la asociativida, en este caso de hab
 
 [^1]: Lo mejor es siempre parentizar **puto**.
 [^2]: `c` no es mañoso en temas de memoria ni debuggeo en caso de agregar o no parentesis **no deberia hacerse mas lentos en caso de agregar parentesis**.
+
+### Inferencia de tipos
+
+`c`, al momento de operar, tiene distintas formas de inferir los tipos que se estan usando. Estos son:
+
+1. Inferencia
+
+``` c
+int a = 1;
+int b = 2; 
+double c = a/b;
+```
+
+En este caso, `c` revisa los tipos de los operandos, de ser todos iguales, entonces el resultado sera entero y despues se traduce al tipo que se pidio. En el ejemplo anterior, `c = 0.0` puesto a que primero se hizo una division entre enteros y despues se paso a `double` o real.
