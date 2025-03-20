@@ -59,3 +59,20 @@ Esto es similar a una union o un `o` de bits (**xd**). Un ejemplo operando estar
 | bit 2 | 1000 1110 |
 
 Ambas herramientas, (`&` y `|` permitira manipular binarios).
+
+### El ~
+
+Corresponde a la negacion binaria, el funcionamiento esta dado por:
+
+``` c
+~0 = 1;
+~1 = 0;
+```
+
+Donde cada bit se va negando de derecha a izquierda por separado. Un ejemplo del funcionamiento estaria dado por:
+
+| valor original | valor negado |
+| - | - |
+| ~(0010 1101) | 1101 0010 |
+
+Nota, hay que estar atento si negamos algun valor con signo, en ese caso cambiariamos el signo. Otra cosa, hay numeros que se pueden definir usando la negacion, como ejemplo: $-1 \iff ~0$
