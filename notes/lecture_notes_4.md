@@ -86,7 +86,7 @@ Llamado desplazamiento a la izquierda (<-), donde la estructura esta dada por: `
 0001 << 3 = 1000;
 ```
 
-Donde siempre se agrega un 0 al final (**basicamente desplazar el numero**), Importante, esto puede cambiar el signo si es que se trabaja con enteros con signo. Los valores que estan mas adelante se pierden, mientras que son rellenados por 0 al final (de pasada recordar que el bit de mas a la izquierda corresponde al mas significativo, mientras que el de mas a la derecha corresponde al menos significativo). Otra cosa importante, si desplazamos una cantidad mas grande que la del numero original (ejemplo: numero de largo 7 desplazarlo en 8), dependera de cada arquitectura de pc/OS que va a pasar, en Debian, el numero quedara igual como si nada hubiera pasado[^1]. Otra cosa importante es que al desplazar...*nos movemos musho xd**, en por 2, ejemplo (1 en binario 0001 << 1 = 0010, lo cual es 2 que, desplazando nuevamente, 0010 << 1 = 0100 = 4)[^2]. La regla de esto: $x << i <=> x*2^{i}$
+Donde siempre se agrega un 0 al final (**basicamente desplazar el numero**), Importante, esto puede cambiar el signo si es que se trabaja con enteros con signo. Los valores que estan mas adelante se pierden, mientras que son rellenados por 0 al final (de pasada recordar que el bit de mas a la izquierda corresponde al mas significativo, mientras que el de mas a la derecha corresponde al menos significativo). Otra cosa importante, si desplazamos una cantidad mas grande que la del numero original (ejemplo: numero de largo 7 desplazarlo en 8), dependera de cada arquitectura de pc/OS que va a pasar, en Debian, el numero quedara igual como si nada hubiera pasado[^1]. Otra cosa importante es que al desplazar...*nos movemos musho xd**, en por 2, ejemplo (1 en binario 0001 << 1 = 0010, lo cual es 2 que, desplazando nuevamente, 0010 << 1 = 0100 = 4)[^2]. La regla de esto: $x << i \iff x*2^{i}$
 
 ### Operacion >>
 
@@ -104,7 +104,7 @@ Esto dara probleams con algunos numeros, ejemplo el -1, que permanecera igual pu
 
 Importante 1, sea x un binario de n bits, x >> n se puede rellenar con 0's o 1's o se mantendra con igual. Esto es, que ocurre cuando nos desplazamos en un numero mayor al largo del numero. Es decir, siempre desplazar max (n-1) bits
 
-Importante 2, el desplazamiento a la derecha es equivalente a una division, analogo al desplazamiento a la izquierda que era una multiplicacion.
+Importante 2, el desplazamiento a la derecha es equivalente a una division, analogo al desplazamiento a la izquierda que era una multiplicacion. La regla de esto: $x >> i \iff x/2^{i}$
 
 [^1]: Importante, no desplazar mas de (n-1) bits, con n el largo del numero.
 [^2]: Esto es importante porque en los controles probablemente (M U Y) tengamos prohibido usara multiplicacion y division.
