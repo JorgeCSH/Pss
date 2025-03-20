@@ -75,4 +75,4 @@ Donde cada bit se va negando de derecha a izquierda por separado. Un ejemplo del
 | - | - |
 | ~(0010 1101) | 1101 0010 |
 
-Nota, hay que estar atento si negamos algun valor con signo, en ese caso cambiariamos el signo. Otra cosa, hay numeros que se pueden definir usando la negacion, como ejemplo: $-1 \iff ~0$
+Nota, hay que estar atento si negamos algun valor con signo, en ese caso cambiariamos el signo. Otra cosa, hay numeros que se pueden definir usando la negacion, como ejemplo: $-1 \iff \~ 0$
