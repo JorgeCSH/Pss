@@ -104,7 +104,7 @@ Esto dara probleams con algunos numeros, ejemplo el -1, que permanecera igual pu
 
 Importante 1, sea x un binario de n bits, x >> n se puede rellenar con 0's o 1's o se mantendra con igual. Esto es, que ocurre cuando nos desplazamos en un numero mayor al largo del numero. Es decir, siempre desplazar max (n-1) bits
 
-Importante 2, el desplazamiento a la derecha es equivalente a una division, analogo al desplazamiento a la izquierda que era una multiplicacion. La regla de esto: $x >> i \iff x/2^{i}$
+Importante 2, el desplazamiento a la derecha es equivalente a una division, analogo al desplazamiento a la izquierda que era una multiplicacion. La regla de esto: $x >> i \iff x/2^{i}$.
 
 [^1]: Importante, no desplazar mas de (n-1) bits, con n el largo del numero.
 [^2]: Esto es importante porque en los controles probablemente (M U Y) tengamos prohibido usara multiplicacion y division.
