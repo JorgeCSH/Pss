@@ -30,3 +30,23 @@ int posicionBit(unsigned int n) {
 ```
 
 ## P2
+
+``` c
+// Sabemos que, para este ejercicio necesitaremos una mascara de largo n para ir comparano patrones de bits
+int posicionBits(int x, int p, int n) {
+  // Para la mascara, usaremos la expresion que pensamos en el comentario anterior
+  unsigned m = -1;
+  int mask = ~(m << n);
+  // En este ejercicio especifico, utilizaremos un for
+  for(unsigned int i = 0; i < sizeof(x)*8; i++) {
+    // Esto nos va a aislar los primero n
+    if (((x >> i) & mask) == p) {
+      return i;
+    } 
+  }
+  return -1;
+}
+
+```
+
+## P3
