@@ -50,3 +50,28 @@ int posicionBits(int x, int p, int n) {
 ```
 
 ## P3
+
+``` c
+// Esto es para crear un tipo uint que, basicamente sea un unsigned int (basicamente para no escribir todo xd)
+typedef unsigned int uint;
+
+// Aca hacemos una funcion con el tipo que definimos con typedef
+uint reBits(uint x, int i, int k, uint val) {
+  uint mask = ~((-1U) << k);
+  mask <<= i;
+  val <<= i;
+
+  mask = ~mask;
+
+  x &= mask;
+  
+  x |= val;
+
+  return x;
+
+}
+```
+
+## Recordatorio
+
+Bits es la primera parte dle control
