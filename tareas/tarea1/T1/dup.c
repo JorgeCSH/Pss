@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "dup.h"
+// Aca es done despues tengo que reemplazar por la funcion
 /*
 unsigned long long dupMasLargo(unsigned long long x) {
   // ... programe aca la funcion pedida ...
