@@ -76,23 +76,35 @@ unsigned long long sex(unsigned long long x, int n) {
 void main(){
   // variable que consideraremos para las pruebas
   unsigned long long x = 0b1101010;
-  unsigned long long y = 0b101010;
   unsigned long long largo_x = x;
-
   // Aca probamos el contador, que gran avance!
   int n= contador(x);
   printf("La cantidad de bits que es: %d", n);
 
   unsigned long long lado_derecho = largo_x;
-  lado_derecho = sex(x, n);
-  printf("\nEl lado derecho deberia estar dado por: %d", lado_derecho);
-  printf("\nx: %d", x);
-  printf("\ny: %d", y);
-  unsigned long long bit_purga = x & lado_derecho;
-  unsigned long long bit_purga = y & (sex(y, contador(y)));
+  unsigned long long lado_izquierdo = largo_x;
 
-  printf("\nAplicando mascara: %d", bit_purga);
-  printf("\nAplicando mascara negada: %d", bit_purga_2);
+  lado_derecho = sex(x, n);
+  lado_izquierdo = lado_derecho;
+  int j = 0; 
+  while (j<n) {
+    lado_izquierdo = lado_izquierdo << 1;
+    j += 2;
+  }
+  
+  unsigned long long x_temp = x;
+  unsigned long long purgador = 0b1;
+  if (j>n){
+    purgador = purgador << n-1;
+  }
+
+  printf("\nEl purgador: %d", purgador);
+  printf("\nEl valor sin purgar: %d", x);
+  printf("\nEl valor despues de la purga: %d", x & (~purgador));
+
+  printf("\nEl lado derecho deberia estar dado por: %d", lado_derecho);
+  printf("\nMientras que el lado izquierdo: %d", lado_izquierdo);
+
 }
 
 
