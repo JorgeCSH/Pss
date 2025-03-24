@@ -81,23 +81,27 @@ void main(){
   int n= contador(x);
   printf("La cantidad de bits que es: %d", n);
 
+  /* Aca le damos valor a los lados que vamos a seccionar, esto es, las "mascaras". */
+  // Este es el lado derecho.
   unsigned long long lado_derecho = largo_x;
+  // Este es el lado izquierdo.
   unsigned long long lado_izquierdo = largo_x;
 
+  // Aca las reemplazamos.
   lado_derecho = sex(x, n);
   lado_izquierdo = lado_derecho;
+  // Caso donde la cantidad de bits es impar.
   int j = 0; 
   while (j<n) {
     lado_izquierdo = lado_izquierdo << 1;
     j += 2;
   }
   
-  unsigned long long x_temp = x;
   unsigned long long purgador = 0b1;
   if (j>n){
     purgador = purgador << n-1;
   }
-
+  // Debuggear es pa weones
   printf("\nEl purgador: %d", purgador);
   printf("\nEl valor sin purgar: %d", x);
   printf("\nEl valor despues de la purga: %d", x & (~purgador));
@@ -109,10 +113,6 @@ void main(){
 
 
 /* TO DO:
-  - Intentar purgar el bit mas significativo de una cuando tenga una cantidad par, asi tendria que hacer mucho a cada
-    rato si es que es una cantidad impar al buscar el lado derecho.
-  - Idea de desarrollo: usar el lado derecho para deshacerme del lado izquierdo, si es que este es igual al mismo numero
-    pero con los valores eliminados en 0, entonces es, esto es:
-    (x >> cant_bits_mitad) << cant_bits_mitad == x & ~(mitad_derecha)
-    (digo mitad derecha porque no se si ese es el termino o sirve con decir mascara xd). (creo que no sirve)
+  - Agregar el caso general.
+  - Eliminar eso de "dar un tamaño", creo que no es necesario.
 */
