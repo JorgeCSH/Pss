@@ -75,10 +75,10 @@ unsigned long long sex(unsigned long long x, int n) {
 // Funcion main que despues hare desaparecer por pvto
 void main(){
   // variable que consideraremos para las pruebas
-  unsigned long long x = 0b101010;
+  unsigned long long x = 0b10101010;
 
   // Aca probamos el contador, que gran avance!
-  int n= contador(x);
+  int n = contador(x);
   printf("La cantidad de bits que es: %d", n);
 
   /* Aca le damos valor a los lados que vamos a seccionar, esto es, las "mascaras". */
@@ -87,8 +87,8 @@ void main(){
   // Este es el lado izquierdo.
   unsigned long long lado_izquierdo = lado_derecho;
 
-  // Caso donde la cantidad de bits es impar.
   int j = 0; 
+  // Caso donde la cantidad de bits es impar.
   while (j<n) {
     lado_izquierdo = lado_izquierdo << 1;
     j += 2;
@@ -97,18 +97,24 @@ void main(){
   // Aca vemos si la cantidad de bits es par o impar.  
   unsigned long long purgador = 0b1;
   if (j>n){
+    lado_izquierdo = lado_izquierdo >> 1;
     purgador = purgador << n-1;
+    x = x & (~purgador);
   }
   
-  unsigned long long x_purga = x & (~purgador);
   // Debuggear es pa weones
   printf("\nEl purgador: %d", purgador);
   printf("\nEl valor sin purgar: %d", x);
-  printf("\nEl valor despues de la purga: %d", x_purga);
+  printf("\nEl valor despues de la purga: %d", x);
 
   printf("\nEl lado derecho deberia estar dado por: %d", lado_derecho);
   printf("\nMientras que el lado izquierdo: %d", lado_izquierdo);
-
+  
+  printf("\nAplicanndo la mascara derecha: %d", x & (~lado_derecho));
+  printf("\nAplicanndo la mascara izquierda: %d", x & (~lado_izquierdo));
+  x = x & (~lado_derecho);
+  x = x & (~lado_izquierdo);
+  printf("\nTotal: %d", x);
 }
 
 
