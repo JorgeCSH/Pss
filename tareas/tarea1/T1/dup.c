@@ -75,14 +75,24 @@ unsigned long long sex(unsigned long long x, int n) {
 // Funcion main que despues hare desaparecer por pvto
 void main(){
   // variable que consideraremos para las pruebas
-  unsigned long long x = 0b1111001010;
+  unsigned long long x = 0b1101010;
+  unsigned long long y = 0b101010;
+  unsigned long long largo_x = x;
 
   // Aca probamos el contador, que gran avance!
-  int poto = contador(x);
-  printf("La cantidad de bits que es: %d", poto);
+  int n= contador(x);
+  printf("La cantidad de bits que es: %d", n);
 
-  unsigned long long lado_derecho = sex(x, poto);
+  unsigned long long lado_derecho = largo_x;
+  lado_derecho = sex(x, n);
   printf("\nEl lado derecho deberia estar dado por: %d", lado_derecho);
+  printf("\nx: %d", x);
+  printf("\ny: %d", y);
+  unsigned long long bit_purga = x & lado_derecho;
+  unsigned long long bit_purga = y & (sex(y, contador(y)));
+
+  printf("\nAplicando mascara: %d", bit_purga);
+  printf("\nAplicando mascara negada: %d", bit_purga_2);
 }
 
 
@@ -92,5 +102,5 @@ void main(){
   - Idea de desarrollo: usar el lado derecho para deshacerme del lado izquierdo, si es que este es igual al mismo numero
     pero con los valores eliminados en 0, entonces es, esto es:
     (x >> cant_bits_mitad) << cant_bits_mitad == x & ~(mitad_derecha)
-    (digo mitad derecha porque no se si ese es el termino o sirve con decir mascara xd).
+    (digo mitad derecha porque no se si ese es el termino o sirve con decir mascara xd). (creo que no sirve)
 */
