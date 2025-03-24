@@ -75,8 +75,8 @@ unsigned long long sex(unsigned long long x, int n) {
 // Funcion main que despues hare desaparecer por pvto
 void main(){
   // variable que consideraremos para las pruebas
-  unsigned long long x = 0b10101010;
-
+  unsigned long long x = 0b11001001;
+  printf("%d", 0b11000000);
   // Aca probamos el contador, que gran avance!
   int n = contador(x);
   printf("La cantidad de bits que es: %d", n);
@@ -101,7 +101,42 @@ void main(){
     purgador = purgador << n-1;
     x = x & (~purgador);
   }
-  
+
+  // Variable que va eliminando bits a medida que no se encuentre la secuencia.
+  unsigned long long reduce_bit = 0b11 << n-2;
+  printf("\nbit purgador: %d", reduce_bit);
+  printf("\nx esta dado por: %d", x);
+  int k = 0;
+  while (x != 0)  {
+    x = x & (~lado_derecho);
+    x = x & (~lado_izquierdo);
+    reduce_bit = reduce_bit >> 2;
+    if (x == 0b0) {
+      printf("\nLa secuencia esta dada por: %d", lado_derecho);
+      break;
+    }
+    printf("\nx se actualizo, ahora esta en: %d", x);
+    if (x < 0b100) {
+      if (x != 0b11) {
+        printf("\nNo existe secuencia");
+        break;
+      } else { 
+        printf("La secuencia existe y es, %d", 0b1);
+      }
+    }
+    x = x & (~reduce_bit);
+    lado_derecho = sex(x, contador(x));
+    lado_izquierdo = lado_derecho;
+
+    int k = 0; 
+    // Caso donde la cantidad de bits es impar.
+    while (k<contador(x)) {
+      lado_izquierdo = lado_izquierdo << 1;
+       k+= 2;
+    }
+  }
+
+  /* 
   // Debuggear es pa weones
   printf("\nEl purgador: %d", purgador);
   printf("\nEl valor sin purgar: %d", x);
@@ -115,10 +150,10 @@ void main(){
   x = x & (~lado_derecho);
   x = x & (~lado_izquierdo);
   printf("\nTotal: %d", x);
+  */
 }
 
 
 /* TO DO:
-  - Agregar el caso general.
-  - Eliminar eso de "dar un tamaño", creo que no es necesario.
+ * - Tomar la seccion izquierda y la seccion derecha e igualarla, no buscar duplcado como lo estaba haciendo (por la miechica)
 */
