@@ -44,7 +44,9 @@ Primero, ¿Que es un puntero?, ANTES (xd), hablemos de las variables. Las variab
 
     tipo
   |------|
+
 x |valor |
+
   |------|
 
 La variable tiene: un valor, una direccion de memoria (espacio en el almacenamiento) y un tamaño (bytes). Para acceder a una variable simplemente usamos el nombre que le dimos, en este ejemplo, es llamar a `x`. Para calcular el tamaño tenemos en `c` una funcion llamada `sizeof(x)` la cual nos da el tamaño, en este ejemplo: `sizeof(x) = 4`. Para la direccion de variable debemos usar el operador amplesamp, el cual nos arroja la ubicacion de la variable.
@@ -53,7 +55,9 @@ Ahora **si**, los punteros son variables que apuntan a otras variables (*o segun
 
                 tipo
               |------|
+
   O ------->x |valor |
+
               |------|
 
 En `c`, los punteros se inicializan y representan con asterizco, el cual apunta a las variables que apuntan a toda variable del tipo dado. En `c`:
