@@ -76,5 +76,20 @@ Caracteristicas de los punteros:
 - Direccion de memoria: `&p`
 - Tamaño (bytes): `sizeof(p) => 8`
 
+A modo de resumen, en la expresion `int *px = &x`, `&x` corresponde al la direccion de memoria, `px` es necesario para usar px (px apuna a x) y para usar x debemos usar `*px`.
+
+Ahora, con esto visto, podemos introducir los arreglos, lo que corresponde a espacios de memoria ocupados de manera consecutiva, donde cada puntero apunta (valga la redundancia) al primer epsacio de memoria, aunque este puede desplazarse. arreglarlo
+
+``` text
+|---|---|---|---|
+| 1 | 2 | 3 | 4 |
+|-^-|---|---|---|
+  | 
+O-|
+P => *p => 1; *p = 20
+```
+
+Importante, no podemos saber el tamaño de un arreglo. Esto dado a que podemos tener mas informacion alocada del computador previamente. Basicamente o lo sabemos de un inicio o nunca lo sabremos.
+
 [^1]: lo dijo la profe: para un valor de 4 digitos, quitar la posicion 1 requerimos una mascara de largo 4 (en la unidad de medida que sea necesaria). Ademas, recordar que el -1 corresponde a puros 1s en bits. *Ademas recordar que para extraer siempre usar el `&`*.
 [^2]: se puede dibujar mejor a manito xd
