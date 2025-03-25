@@ -43,14 +43,10 @@ unsigned int recortar(unsigned int x, int i, int j) {
 Primero, ¿Que es un puntero?, ANTES (xd), hablemos de las variables. Las variables son todo lo que se puede inicializar (`int x = 69` inicializado, `int x` no esta inicializado) con un tipo, a estas variables, el computador le asigna un espacio de memoria representada como:
 
 ``` text
-```
-
     tipo
   |------|
 x |valor |
   |------|
-
-```
 ```
 
 La variable tiene: un valor, una direccion de memoria (espacio en el almacenamiento) y un tamaño (bytes). Para acceder a una variable simplemente usamos el nombre que le dimos, en este ejemplo, es llamar a `x`. Para calcular el tamaño tenemos en `c` una funcion llamada `sizeof(x)` la cual nos da el tamaño, en este ejemplo: `sizeof(x) = 4`. Para la direccion de variable debemos usar el operador amplesamp, el cual nos arroja la ubicacion de la variable.
@@ -58,14 +54,11 @@ La variable tiene: un valor, una direccion de memoria (espacio en el almacenamie
 Ahora **si**, los punteros son variables que apuntan a otras variables (*o segun el profe almacena otras variables/apuntan a otras variables). Esto quiere decir, si tenemos la variable x, el puntero se representa como[^2] (**todo un artista):
 
 ``` text
-```
-
                 tipo
               |------|
   O ------->x |valor |
               |------|
 
-```
 ```
 
 En `c`, los punteros se inicializan y representan con asterizco, el cual apunta a las variables que apuntan a toda variable del tipo dado. En `c`:
