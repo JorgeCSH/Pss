@@ -38,4 +38,26 @@ unsigned int recortar(unsigned int x, int i, int j) {
 
 - La mascara 2: para la mascara 2 necesitamos que sean 1s en el lado izquierdo, es decir, `32-j` 1s. Para esto tenemos dos opciones (**ambas en el codigo**), la primera es usar una mascara de puros 1s y desplazarlo para hacer aparecer 0s
 
+## Punteros en `c`
+
+Primero, ¿Que es un puntero?, ANTES (xd), hablemos de las variables. Las variables son todo lo que se puede inicializar (`int x = 69` inicializado, `int x` no esta inicializado) con un tipo, a estas variables, el computador le asigna un espacio de memoria representada como:
+    tipo
+  |------|
+x |valor |
+  |------|
+Ua variable tiene: un valor, una direccion de memoria (espacio en el almacenamiento) y un tamaño (bytes). Para acceder a una variable simplemente usamos el nombre que le dimos, en este ejemplo, es llamar a `x`. Para calcular el tamaño tenemos en `c` una funcion llamada `sizeof(x)` la cual nos da el tamaño, en este ejemplo: `sizeof(x) = 4`. Para la direccion de variable debemos usar el operador amplesamp, el cual nos arroja la ubicacion de la variable.
+
+Ahora **si**, los punteros son variables que apuntan a otras variables (*o segun el profe almacena otras variables/apuntan a otras variables). Esto quiere decir, si tenemos la variable x, el puntero se representa como[^2] (**todo un artista):
+                tipo
+              |------|
+  O ------->x |valor |
+              |------|
+En `c`, los punteros se inicializan y representan con asterizco, el cual apunta a las variables que apuntan a toda variable del tipo dado. En `c`:
+
+``` c
+int x = 5;
+int *p; 
+```
+
 [^1]: lo dijo la profe: para un valor de 4 digitos, quitar la posicion 1 requerimos una mascara de largo 4 (en la unidad de medida que sea necesaria). Ademas, recordar que el -1 corresponde a puros 1s en bits. *Ademas recordar que para extraer siempre usar el `&`*.
+[^2]: se puede dibujar mejor a manito xd
