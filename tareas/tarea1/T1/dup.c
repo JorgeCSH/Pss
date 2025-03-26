@@ -7,10 +7,6 @@ unsigned long long dupMasLargo(unsigned long long x) {
   //unsigned long long x = 0b110101011;
   //unsigned long long x = 0b101100100100100100100;
 
-  if (x == 0 | x == 1) {
-    return 0;
-  }
-
   /* Constantes que se usaran para determinar largo y propiedades de los largos de los bits. */
   // Constantes que contiene la cantidad de bits.
   int n_total = 0;
@@ -104,5 +100,5 @@ unsigned long long dupMasLargo(unsigned long long x) {
     j -= 2;
     i -= 1;
   }
-
+  return resultado;
 }
