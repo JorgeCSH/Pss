@@ -113,7 +113,7 @@ unsigned long long sex(unsigned long long x, int n) {
 // Funcion main que despues hare desaparecer por pvto
 void main(){
 
-  unsigned long long x = 1010101;
+  unsigned long long x = 0b110101011;
   // Primero veremos si el numero tiene una cantidad par de bits
   unsigned long long x_modificado = x;
 
@@ -124,7 +124,7 @@ void main(){
   unsigned long long j = 0;
 
   unsigned long long valor_contador = x;
-  while (x!=0) {
+  while (valor_contador!=0b0) {
     valor_contador = valor_contador >> 1;
     n_total++;
   }
@@ -145,17 +145,32 @@ void main(){
   unsigned long long patron;
   int k = 0;
   while (k < n_total-1) {
-    // Mascara lado derecho
-    unsigned long long mask1 = ~((-1) << i);
-    // Mascara lado izquierdo
-    unsigned long long mask2 = ~((-1) << j);
-    unsigned long long der = x_modificado & mask1;
-    unsigned long long izq = x_modificado & mask2;
-    patron = izq | der;
-    printf("%llu\n", patron);
-    k += 2;
-  }
 
+    printf("%llu\n", x);
+
+    // Mascara lado derecho
+    unsigned long long mask1 = ~(((-1) << i));
+
+    // Mascara lado izquierdo
+    unsigned long long mask2 = ~(((-1) << j));
+
+    // Aca tenemos los valores que deberian estar dando a los lados
+    unsigned long long izq = x & mask2;
+    unsigned long long der = x & mask1;
+
+    izq = izq >> i;
+    if (izq == der) {
+      printf("\nLo haz logrado, s = %llu", izq);
+      break;
+    }
+    // Debuggear es pa weones
+    printf("\nSeccion izquierda: %llu", izq);
+    printf("\nSeccion derecha: %llu", der);
+    printf("\n");
+    k += 2;
+    j -= 2;
+    i -= 1;
+  }
 
 }
 
