@@ -96,4 +96,8 @@ unsigned long long dupMasLargo(unsigned long long x) {
     i -= 1;
   }
 
+  /* Resultados */
+  // Cambiamos el nombre al resultado, tecnicamente deberia funcionar tanto el lado izquierdo como el derecho.
+  unsigned long long resultado = izq;
+  return resultado;
 }
