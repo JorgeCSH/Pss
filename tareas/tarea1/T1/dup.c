@@ -3,11 +3,49 @@
 
 #include "dup.h"
 // Aca es done despues tengo que reemplazar por la funcion
-/*
 unsigned long long dupMasLargo(unsigned long long x) {
-  // ... programe aca la funcion pedida ...
+  // Primero veremos si el numero tiene una cantidad par de bits
+  unsigned long long x_modificado = x;
+
+  int n_total = 0;
+  int n_decididor = 0;
+
+  unsigned long long i = 0;
+  unsigned long long j = 0;
+
+  unsigned long long valor_contador = x;
+  while (x!=0) {
+    valor_contador = valor_contador >> 1;
+    n_total++;
+  }
+
+  while (n_decididor < n_total) {
+    n_decididor += 2;
+    j += 2;
+    i++;
+  }
+
+  // Caso donde es impar, en otro caso, se salta
+  if (n_decididor > n_total) {
+    unsigned long long par_mask = 0b1 << n_total;
+    x_modificado = x_modificado & (~par_mask);
+    j -= 2;
+    i--;
+  }
+  unsigned long long patron;
+  int k = 0;
+  while (k < n_total-1) {
+    // Mascara lado derecho
+    unsigned long long mask1 = ~((-1) << i);
+    // Mascara lado izquierdo
+    unsigned long long mask2 = ~((-1) << j);
+    unsigned long long der = x_modificado & mask1;
+    unsigned long long izq = x_modificado & mask2;
+    patron = izq | der;
+    k +=2;
+  }
+
 }
-*/
 
 /* Funcion que cuenta la cantidad de bits
 Funcion que cuenta la cantidad de bits que tienen un numero.
@@ -74,83 +112,51 @@ unsigned long long sex(unsigned long long x, int n) {
 
 // Funcion main que despues hare desaparecer por pvto
 void main(){
-  // variable que consideraremos para las pruebas
-  unsigned long long x = 0b11001001;
-  printf("%d", 0b11000000);
-  // Aca probamos el contador, que gran avance!
-  int n = contador(x);
-  printf("La cantidad de bits que es: %d", n);
 
-  /* Aca le damos valor a los lados que vamos a seccionar, esto es, las "mascaras". */
-  // Este es el lado derecho.
-  unsigned long long lado_derecho = sex(x, n);
-  // Este es el lado izquierdo.
-  unsigned long long lado_izquierdo = lado_derecho;
+  unsigned long long x = 1010101;
+  // Primero veremos si el numero tiene una cantidad par de bits
+  unsigned long long x_modificado = x;
 
-  int j = 0; 
-  // Caso donde la cantidad de bits es impar.
-  while (j<n) {
-    lado_izquierdo = lado_izquierdo << 1;
+  int n_total = 0;
+  int n_decididor = 0;
+
+  unsigned long long i = 0;
+  unsigned long long j = 0;
+
+  unsigned long long valor_contador = x;
+  while (x!=0) {
+    valor_contador = valor_contador >> 1;
+    n_total++;
+  }
+
+  while (n_decididor < n_total) {
+    n_decididor += 2;
     j += 2;
+    i++;
   }
 
-  // Aca vemos si la cantidad de bits es par o impar.  
-  unsigned long long purgador = 0b1;
-  if (j>n){
-    lado_izquierdo = lado_izquierdo >> 1;
-    purgador = purgador << n-1;
-    x = x & (~purgador);
+  // Caso donde es impar, en otro caso, se salta
+  if (n_decididor > n_total) {
+    unsigned long long par_mask = 0b1 << n_total;
+    x_modificado = x_modificado & (~par_mask);
+    j -= 2;
+    i--;
   }
-
-  // Variable que va eliminando bits a medida que no se encuentre la secuencia.
-  unsigned long long reduce_bit = 0b11 << n-2;
-  printf("\nbit purgador: %d", reduce_bit);
-  printf("\nx esta dado por: %d", x);
+  unsigned long long patron;
   int k = 0;
-  while (x != 0)  {
-    x = x & (~lado_derecho);
-    x = x & (~lado_izquierdo);
-    reduce_bit = reduce_bit >> 2;
-    if (x == 0b0) {
-      printf("\nLa secuencia esta dada por: %d", lado_derecho);
-      break;
-    }
-    printf("\nx se actualizo, ahora esta en: %d", x);
-    if (x < 0b100) {
-      if (x != 0b11) {
-        printf("\nNo existe secuencia");
-        break;
-      } else { 
-        printf("La secuencia existe y es, %d", 0b1);
-      }
-    }
-    x = x & (~reduce_bit);
-    lado_derecho = sex(x, contador(x));
-    lado_izquierdo = lado_derecho;
-
-    int k = 0; 
-    // Caso donde la cantidad de bits es impar.
-    while (k<contador(x)) {
-      lado_izquierdo = lado_izquierdo << 1;
-       k+= 2;
-    }
+  while (k < n_total-1) {
+    // Mascara lado derecho
+    unsigned long long mask1 = ~((-1) << i);
+    // Mascara lado izquierdo
+    unsigned long long mask2 = ~((-1) << j);
+    unsigned long long der = x_modificado & mask1;
+    unsigned long long izq = x_modificado & mask2;
+    patron = izq | der;
+    printf("%llu\n", patron);
+    k += 2;
   }
 
-  /* 
-  // Debuggear es pa weones
-  printf("\nEl purgador: %d", purgador);
-  printf("\nEl valor sin purgar: %d", x);
-  printf("\nEl valor despues de la purga: %d", x);
 
-  printf("\nEl lado derecho deberia estar dado por: %d", lado_derecho);
-  printf("\nMientras que el lado izquierdo: %d", lado_izquierdo);
-  
-  printf("\nAplicanndo la mascara derecha: %d", x & (~lado_derecho));
-  printf("\nAplicanndo la mascara izquierda: %d", x & (~lado_izquierdo));
-  x = x & (~lado_derecho);
-  x = x & (~lado_izquierdo);
-  printf("\nTotal: %d", x);
-  */
 }
 
 
