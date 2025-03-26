@@ -5,7 +5,11 @@
 unsigned long long dupMasLargo(unsigned long long x) {
   // Debuggear es pa weones
   //unsigned long long x = 0b110101011;
-  unsigned long long x = 0b101100100100100100100;
+  //unsigned long long x = 0b101100100100100100100;
+
+  if (x == 0 | x == 1) {
+    return 0;
+  }
 
   /* Constantes que se usaran para determinar largo y propiedades de los largos de los bits. */
   // Constantes que contiene la cantidad de bits.
@@ -23,7 +27,7 @@ unsigned long long dupMasLargo(unsigned long long x) {
   // Variable auxiliar igual a la utilizada que contara la cantidad de bits que hay sin afectar a la original.
   unsigned long long valor_contador = x;
   // Mientras no sea 0 en bits, aun hay que contar.
-  while (valor_contador != 0b0) {
+  while (valor_contador != 9) {
     // Desplazamos la variable auxiliar en 1 y contamos, esto hasta llegar a 0.
     valor_contador = valor_contador >> 1;
     // Contamos cuantas veces se desplazaron los bits.
@@ -65,7 +69,7 @@ unsigned long long dupMasLargo(unsigned long long x) {
   while (k < n_total-1) {
 
     // Debuggear es pa weones
-    printf("%llu\n", x);
+    //printf("%llu\n", x);
 
     // Mascara lado derecho.
     mask1 = ~(((-1) << i));
@@ -81,23 +85,24 @@ unsigned long long dupMasLargo(unsigned long long x) {
     izq = izq >> i;
     // Condicion 2: se encuentra la secuencia.
     if (izq == der) {
-      printf("\nLo haz logrado, s = %llu", izq);
+      //printf("\nLo haz logrado, s = %llu", izq);
       break;
+      /* Resultados */
+      // Cambiamos el nombre al resultado, tecnicamente deberia funcionar tanto el lado izquierdo como el derecho.
+      unsigned long long resultado = izq;
+      return resultado;
     }
 
     // Debuggear es pa weones
+    /*
     printf("\nSeccion izquierda: %llu", izq);
     printf("\nSeccion derecha: %llu", der);
     printf("\n");
-
+    */
     // Aca aumentamos el contador y desplazamos las posiciones.
     k += 2;
     j -= 2;
     i -= 1;
   }
 
-  /* Resultados */
-  // Cambiamos el nombre al resultado, tecnicamente deberia funcionar tanto el lado izquierdo como el derecho.
-  unsigned long long resultado = izq;
-  return resultado;
 }
