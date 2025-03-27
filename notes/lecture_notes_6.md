@@ -123,7 +123,9 @@ Los strings tienen funciones importantes:
 
 - Funcion para obtener el largo de un string: `int strlen(char *str)`, de esta froma si tenemos un `char str[] = "Hola";`, entonces `strlen(str);` devolvera `4`.
 
-- Funcion para comparar puesto a que los strings no pueden compararse con el `==`. Esta funcion esta dada por: `int stromp(char *str1, char *str2);`, la cual arroja `0` si son igual (es decir, un `==`), si arroja un `>0`, entonces `str1 > str2`, mientras que `str1 < str2`. LO IMPORTANTE ES NO USAR EL `==` ENTRE STRINGS, si lo usamos con `char*`, entonces nos pondremos a comparar los valores de las direcciones de memoria, lo cual no es lo que queremos.
+- Funcion para comparar puesto a que los strings no pueden compararse con el `==`. Esta funcion esta dada por: `int stromp(char *str1, char *str2);`, la cual arroja `0` si son igual (es decir, un `==`), si arroja un `>0`, entonces `str1 > str2`, mientras que `str1 < str2`. LO IMPORTANTE ES NO USAR EL `==` ENTRE STRINGS, si lo usamos con `char*`, entonces nos pondremos a comparar los valores de las direcciones de memoria, lo cual no es lo que queremos. Volviendo a los `<>`, esto es en tema lexicografico, es decir cual tiene mayor orden (una wea (?) que compara los ASCII's de un valor).
+
+- Funcion para copiar strings, esta retorna un `char*` y esta dada por: `char * strcpy(char *str1, char *str2);`, donde lo que hacemos es copiar el `str2` en el `str1`. Importante, el `str1` debe ser un string mutable.
 
 [^1] Si, el cuerpo docente nos hara usar la ***OTRA*** opcion.
 [^2]: En `debian 12` deberiamos de estar rellenos de `0`'s.
