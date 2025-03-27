@@ -93,5 +93,37 @@ int *aux = a;
 
 Ahora, volviendo a lo anterior, el incremento en el punteor puede resumirse en una operacion que llamaremos posincremento, la cual esta dada por: `*a++` y pre incremento `*++a`, en la primera primero asigno y despues me desplazo, en la segunda me desplazo y despues asigno. Esta operacion tambien funciona con resta `*a--` y `*--a`:
 
+## Strings
+
+Los strings corresponde a un arreglod e `char` que termina con 0. Para inicializar un string tenemos diferentes forma:
+
+1) Definiendo el arreglo: para esto debemos inicializar con `char` de la forma:
+
+``` c
+char s[] = {'H', 'O', 'L', 'A', 0};
+```
+
+2) Iniciar un arreglo con un numero definido, esto es, alocar una cantidad de espacio para el string:
+
+``` c
+char str[20];
+```
+
+3) Inicializar con el puntero (o *asterizco como dijo la profe*), esot es, un string dado por las comillas clasicas. :
+
+``` c
+char *str = "Hola";
+```
+
+CUIDADO, en `c` hay diferencia entre las comillas simples y dobles. Con comillas dobles se tratara de un string completito, es decir, `"a" => string (char*)`, mientra que `'a'` corresponde a un caracter, es decir `char`.
+
+En cada caso tenemos que, los casos 1) y 2) son mutables, es decir pueden escribirse y leerse. Sin embargo, el 3) corresponde a uno inmutable, es decir, solo podemos recorrerlos y leerlos, pero no reescribirlos. Ojo, `char str[] = "Hello";`.
+
+Los strings tienen funciones importantes:
+
+- Funcion para obtener el largo de un string: `int strlen(char *str)`, de esta froma si tenemos un `char str[] = "Hola";`, entonces `strlen(str);` devolvera `4`.
+
+- Funcion para comparar puesto a que los strings no pueden compararse con el `==`. Esta funcion esta dada por: `int stromp(char *str1, char *str2);`, la cual arroja `0` si son igual (es decir, un `==`), si arroja un `>0`, entonces `str1 > str2`, mientras que `str1 < str2`. LO IMPORTANTE ES NO USAR EL `==` ENTRE STRINGS, si lo usamos con `char*`, entonces nos pondremos a comparar los valores de las direcciones de memoria, lo cual no es lo que queremos.
+
 [^1] Si, el cuerpo docente nos hara usar la ***OTRA*** opcion.
 [^2]: En `debian 12` deberiamos de estar rellenos de `0`'s.
