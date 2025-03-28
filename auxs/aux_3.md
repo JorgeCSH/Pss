@@ -62,7 +62,7 @@ int palindromo(char *s) {
 
 ## P3
 
-Para hacer este problema usaremos una mecanica similar a la anterior en donde ubicaremos dos punteros[^1]. Esto nos dan una variable o espacio usado con valor constante (**basicamente una variable constante (?)**). Como tenemos que dar vuelta (o mejor decido) intercambiar dos variables,
+Para hacer este problema usaremos una mecanica similar a la anterior en donde ubicaremos dos punteros[^1]. Esto nos dan una variable o espacio usado con valor constante (**basicamente una variable constante (?)**). Como tenemos que dar vuelta (o mejor decido) intercambiar dos variables, usaermos una variable auxiliar para guardar un valor a, reemplazamos el valor a por b y despues el valor de b lo reemplazampos por el de la variable auxiliar.
 
 ``` c
 # include <string.h>
@@ -82,6 +82,34 @@ void reverse(char *s) {
 
     front++;
     back--;
+  }
+}
+```
+
+## P4
+
+Para esto, usaremos un arreglo para guardar mas de un contador dependiendo de un valor entregado.
+
+``` c
+// No usar los corchetes en el control.
+char mas_repetido(char *s) {
+  /* Creamos un arreglo de char's, este es de largo 256 por 
+  la cantidad de bits que tiene, el cual permite recorrer de 
+  todos los tamaños */
+  int char[256] = {0};
+  while(*s) {
+    // Con el ++ aumento en 1 al valor dentro del arreglo.
+    chars[(int)*s]++;
+    s++;
+  }
+  
+  int max = -1;
+  char max_char;
+  for(int i = 0; i < 256; i++) {
+    if(chars[i] > max) {
+      max = chars[i];
+      max_char = chars[i];
+    }
   }
 }
 ```
