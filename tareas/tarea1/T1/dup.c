@@ -10,8 +10,10 @@ unsigned long long dupMasLargo(unsigned long long x) {
   if (x == 0) {
     x = (unsigned long long)1 << 37;
     x = ~x;
+    //printf("izq: %llu: ", ~x);
     return ~x;
   }
+
   unsigned long long x_modificado = x;
 
   int n_total = 0;
@@ -40,32 +42,37 @@ unsigned long long dupMasLargo(unsigned long long x) {
   }
 
   int k = 0;
-
+  int l = 0;
+  unsigned long long izq = 0;
+  unsigned long long der = 0;
 
   while (k < n_total-1) {
+
     unsigned long long mask1 = ~(((-1) << i));
     unsigned long long mask2 = ~(((-1) << j));
 
-    unsigned long long izq = x & mask2;
-    unsigned long long der = x & mask1;
+    izq = x & mask2;
+    der = x & mask1;
 
     izq = izq >> i;
 
     if (izq == der) {
+      //printf("izq: %llu: ", izq);
       break;
-      return (unsigned)izq<<1;
     }
 
     if (k + 2 >= n_total-1 && ((izq == 1 && der == 0) || (izq == 0 && der == 1))){
       izq = 0;
+      //printf("izq: %llu: ", izq);
       break;
     }
 
+    l++;
     k += 2;
     j -= 2;
     i -= 1;
   }
-  return 0;
+  return (~(0)<<(l+1))&(izq);
 }
 
 

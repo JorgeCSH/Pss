@@ -80,13 +80,14 @@ unsigned long long dupMasLargo(unsigned long long x) {
     j -= 2;
     i -= 1;
     }
-  unsigned long long resultado = izq;
-  return resultado;
+  unsigned long long resultado = 1;
+
+  return (unsigned long long)izq;
 }
 
 
 // Funcion main que despues hare desaparecer por pvto
-void main(){
+int main(){
   unsigned long long resultado_1;
   unsigned long long resultado_2;
   unsigned long long resultado_3;
@@ -114,5 +115,6 @@ void main(){
   printf("\n\nResultado 8: %llu", resultado_8);
   resultado_9 = dupMasLargo(3);
   printf("\n\nResultado 9: %llu", resultado_9);
+  return 0;
 }
 
