@@ -59,3 +59,31 @@ int palindromo(char *s) {
   return 1;
 }
 ```
+
+## P3
+
+Para hacer este problema usaremos una mecanica similar a la anterior en donde ubicaremos dos punteros[^1]. Esto nos dan una variable o espacio usado con valor constante (**basicamente una variable constante (?)**). Como tenemos que dar vuelta (o mejor decido) intercambiar dos variables,
+
+``` c
+# include <string.h>
+
+void reverse(char *s) {
+  char *front = s;
+  char *back = s + strlnes(s) - 1;
+
+  while(front < back) {
+    /* Esto cuenta como O(1) puesto a que solo estamos usando 1 byte 
+    cada vez */
+    char aux = *front;
+
+    // Aca las igualamos.
+    *front = *back;
+    *back = *front;
+
+    front++;
+    back--;
+  }
+}
+```
+
+[^1]: da lo mismo donde este el *, puede ser `char* s` o `char *s`.
