@@ -43,8 +43,8 @@ unsigned long long dupMasLargo(unsigned long long x) {
 
 
   while (k < n_total-1) {
-    unsigned long long mask1 = ~(((-1) << i));
-    unsigned long long mask2 = ~(((-1) << j));
+    unsigned long long mask1 = ~((unsigned long long)(-1) << i);
+    unsigned long long mask2 = ~((unsigned long long)(-1) << j);
 
     unsigned long long izq = x & mask2;
     unsigned long long der = x & mask1;
@@ -65,7 +65,7 @@ unsigned long long dupMasLargo(unsigned long long x) {
     j -= 2;
     i -= 1;
   }
-  return 0;
+  return izq;
 }
 
 
