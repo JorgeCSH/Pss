@@ -40,21 +40,13 @@ unsigned long long dupMasLargo(unsigned long long x) {
     j -= 2;
     i--;
   }
-
   int k = 0;
-  int l = 0;
   unsigned long long izq = 0;
   unsigned long long der = 0;
 
   while (k < n_total-1) {
-<<<<<<< HEAD
     unsigned long long mask1 = ~((unsigned long long)(-1) << i);
     unsigned long long mask2 = ~((unsigned long long)(-1) << j);
-=======
-
-    unsigned long long mask1 = ~(((-1) << i));
-    unsigned long long mask2 = ~(((-1) << j));
->>>>>>> 8d53dba815aea85541cc89ef71ebe276e1f2af7e
 
     izq = x & mask2;
     der = x & mask1;
@@ -62,7 +54,12 @@ unsigned long long dupMasLargo(unsigned long long x) {
     izq = izq >> i;
 
     if (izq == der) {
-      //printf("izq: %llu: ", izq);
+      i =(unsigned long long )i << (32);
+      printf("izq: %llu: ", izq);
+      izq = i | izq;
+      printf("\n i = %llu", i);
+
+      printf("izq: %llu: ", izq);
       break;
     }
 
@@ -72,16 +69,11 @@ unsigned long long dupMasLargo(unsigned long long x) {
       break;
     }
 
-    l++;
     k += 2;
     j -= 2;
-    i -= 1;
+    i--;
   }
-<<<<<<< HEAD
-  return izq;
-=======
-  return (~(0)<<(l+1))&(izq);
->>>>>>> 8d53dba815aea85541cc89ef71ebe276e1f2af7e
+  return (unsigned long long)izq;
 }
 
 
