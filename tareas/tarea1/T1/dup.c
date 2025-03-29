@@ -4,76 +4,35 @@
 #include "dup.h"
 
 unsigned long long dupMasLargo(unsigned long long x) {
-  if (x == 1 || x == 2) {
-    x = x << 1;
-  } 
-  if (x == 0) {
-    x = (unsigned long long)1 << 37;
-    x = ~x;
-    //printf("izq: %llu: ", ~x);
-    return ~x;
-  }
+	unsigned long long izq = 0;
+	unsigned long long der = 0;
+	
+	unsigned long long i = 0;
+	unsigned long long j = 0;
 
-  unsigned long long x_modificado = x;
-
-  int n_total = 0;
-  int n_decididor = 0;
-
-  unsigned long long i = 0;
-  unsigned long long j = 0;
-
-  unsigned long long valor_contador = x;
-  while (valor_contador!=0) {
-    valor_contador = valor_contador >> 1;
-    n_total++;
-  }
-
-  while (n_decididor < n_total) {
-    n_decididor += 2;
-    j += 2;
-    i++;
-  }
-  
-  if (n_decididor > n_total) {
-    unsigned long long par_mask = 1 << n_total;
-    x_modificado = x_modificado & (~par_mask);
-    j -= 2;
-    i--;
-  }
-  int k = 0;
-  unsigned long long izq = 0;
-  unsigned long long der = 0;
-
-  while (k < n_total-1) {
-    unsigned long long mask1 = ~((unsigned long long)(-1) << i);
-    unsigned long long mask2 = ~((unsigned long long)(-1) << j);
-
-    izq = x & mask2;
-    der = x & mask1;
-
-    izq = izq >> i;
-
-    if (izq == der) {
-      i =(unsigned long long )i << (32);
-      printf("izq: %llu: ", izq);
-      izq = i | izq;
-      printf("\n i = %llu", i);
-
-      printf("izq: %llu: ", izq);
-      break;
-    }
-
-    if (k + 2 >= n_total-1 && ((izq == 1 && der == 0) || (izq == 0 && der == 1))){
-      izq = 0;
-      //printf("izq: %llu: ", izq);
-      break;
-    }
-
-    k += 2;
-    j -= 2;
-    i--;
-  }
-  return (unsigned long long)izq;
-}
-
+	unsigned long long resultado = 0;	
+	
+	int k = 32;
+	if (x == 0) {
+		return (unsigned long long)1 << 37;
+	}
+	if ((x << 32) == ((x >> 32)<<32)) {
+		printf("\n oof");
+		return ((unsigned long long)1 << 37) | (x >> 32);
+	}
+	while (k) {
+		izq = (x << j)>> (32+i) ;
+		der = (x << (32 + i)) >> (32 + i);
+		if (izq	== der) {
+			unsigned long long largoSecuencia = (32-i);
+			
+			largoSecuencia = largoSecuencia << 32;
+			resultado = largoSecuencia | der;
+			break;
+		}
+		j += 2;
+		i++;
+		k--;
+	}
+	return resultado;
 
