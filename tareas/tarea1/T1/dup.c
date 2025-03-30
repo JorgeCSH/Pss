@@ -4,6 +4,7 @@
 #include "dup.h"
 
 unsigned long long dupMasLargo(unsigned long long x) {
+  // ... programe aca la funcion pedida ...
   // Variables que corresponden a los dos prefijos s.
   unsigned long long izq;
   unsigned long long der;
