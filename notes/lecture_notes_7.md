@@ -58,4 +58,16 @@ Malloc retorna un "punteor opaco", el cual puede ser de cualquier tipo de variab
 int * n = malloc(20);
 ```
 
-Donde en este caso, los 20 bytes de memoria se asumiran que son del tipo `int`.
+Donde en este caso, los 20 bytes de memoria se asumiran que son del tipo `int`. Importante mencionar que el tamaño que se alocara dependera del tipo de variables, por ende recordar el tamaño de las variables. Por ende, una de las formas con la que usaremos maloc sera con el tamaño de las variables, es decir:
+
+``` c
+// Manera general.
+  // Este double lo agregue yo jeje
+double T;
+T *var = malloc(n*sizeof(T));
+
+// Ejemplo con los ints.
+int *var = malloc(40 *sizeof(int));
+```
+
+Generalmente, con arreglos de caracteres omitiremos un valor porque asumiremops que esta dado por 1 (**?**). Importante (**para variar otra wea importante**), cuando tratamos con `strings`, recordar reservar un espacio para el `0`.
