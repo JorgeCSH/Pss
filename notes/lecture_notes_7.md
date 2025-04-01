@@ -70,4 +70,28 @@ T *var = malloc(n*sizeof(T));
 int *var = malloc(40 *sizeof(int));
 ```
 
-Generalmente, con arreglos de caracteres omitiremos un valor porque asumiremops que esta dado por 1 (**?**). Importante (**para variar otra wea importante**), cuando tratamos con `strings`, recordar reservar un espacio para el `0`.
+Generalmente, con arreglos de caracteres omitiremos un valor porque asumiremops que esta dado por 1 (**?**). Importante (**para variar otra wea importante**), cuando tratamos con `strings`, recordar reservar un espacio para el `0`, como ejemplo:
+
+``` c
+// El 20 es el largo del string mientras que el +1 es el valor asociado al 0.
+char *var = malloc(20 + 1);
+```
+
+Ahora, recordemos que debemos manualmente destruir la memoria que creamos, el codigo no lo va a hacer. Para esto tenemos una funcion llamada `free`, la cual libera espacios de memoria. Esta funcion recibe un puntero el cual DEBE HABER SIDO CREADO CON MALLOC y esta dada la firma por:
+
+``` c
+#include <stdlib.h>
+void free(void *ptr);
+```
+
+Es (para variar) importante notar que, `free` libera toda memoria alocada. Un ejemplo mas completo:
+
+``` c
+char *s = malloc(20);
+```
+
+Cosas que no hay que hacer:
+
+1. Doble free.
+2. Liberar memoria parcial.
+3. Liberar variables no dinamicas.
