@@ -95,3 +95,12 @@ Cosas que no hay que hacer:
 1. Doble free.
 2. Liberar memoria parcial.
 3. Liberar variables no dinamicas.
+
+Finalmente, importante (xd) mencionar que `malloc` gneera strings mutables.
+
+Malloc tiene dos grandes problemas:
+
+1) Memory leaks: espacios de memorias que reservamos que nunca se liberaron.[^1]
+2) Dangling reference: tambien llamados "punteros colgantes", corresponden a punteros que estan apuntando a espacio de memoria ya liberados.
+
+[^1]: Este puede ser chistoso para hacer travesuras jiji BOOOM
