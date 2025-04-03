@@ -113,3 +113,52 @@ Tomando nuevalemte le caso del numero complejo, para inicializar un numero como 
 ``` c
 struct complejo x = {2, 3};
 ```
+
+Para acceder a los parametros, usamos los `.`, igual que las estructuras en python. De esta forma para acceder habria que realizar:
+
+``` c
+x.campo_1 
+```
+
+Siguiendo el ejemplo del numero complejo:
+
+``` c
+double real_x = x.real;
+double im_x = x.im;
+```
+
+Ademas, podemos renombrar tipos usando el comando  `typedef`, donde su uso esta dado por:
+
+``` c
+typedef nuevoTipo tipoOriginal;
+```
+
+Ejemplo:
+
+``` c
+typedef ull unsigned long long;
+
+unsigned long long funcion1(void){};
+
+ull funcion2(void){};
+```
+
+Ademas, podemos juntarlas y crear una monstruosidad como uso de `typedef struct`, esto es para renombrar estructuraas (**?**), de esta forma:
+
+``` c
+typedef struct name {
+  tipo_1 campo_1;
+  tipo_2 campo_2;
+} nombreTipo;
+```
+
+Como ejemplo de los numeros complejos:
+
+``` c
+typedef struct complejo {
+  double real;
+  double im;
+} com;
+
+com x = {2, 3};
+```
