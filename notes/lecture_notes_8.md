@@ -162,3 +162,29 @@ typedef struct complejo {
 
 com x = {2, 3};
 ```
+
+Las estructuras tambien pueden manejarse como punteros *las estructuras, al ser un tipo, puede usarse la mayoria de operaciones de tipos*). Para usar los punteros tenemos que hacer:
+
+``` c  
+struct nombre* var;
+```
+
+Esto es importante porque los necesitaremos para implementar funciones sobre estructuras, de esta forma (como ejemplo) una funcion para sumar complejos poria estar dado por:
+
+``` c
+void sumar(com *x, com y){
+  (*x).real += y.real;
+  (*x).im += y.im;
+}
+```
+
+Donde el puntero debe ser usado en la estructura que queramos modificar, la cual para poder modificar su informacion, debemos desreferenciarla antes. Para implementarlo debemos pasar la direccion de memoria, de esta forma la funcion main donde ejecutariamos este proceso estaria dado por:
+
+``` c
+void main() {
+  com x = {2, 3};
+  com y = {1, 2};
+
+  sumar(&x, y);
+}
+```
