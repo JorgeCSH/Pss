@@ -3,6 +3,7 @@
 ## Antes, un ejercicio
 
 Modificando string:
+
 ``` c
 void eliminarChar(char *str, char x) {
   /* Puntero  que apunta a str, este lo que hace es 
@@ -30,7 +31,7 @@ void eliminarChar(char *str, char x) {
 
 Ahora, implementemos el mismo ejercicio pero usando `malloc`:
 
-``` c 
+``` c
 char *eliminados(char *str, char x) {
   /* Primero contamos los caracteres que debe tener 
   el nuevo stirng, por ende ocupara mas tiempo. */
@@ -62,4 +63,53 @@ char *eliminados(char *str, char x) {
   *copyNew = 0;
   return new;
 }
+```
+
+## Estructuras
+
+Las estructuras en `c` corresponden a variables de tipo compuesto *que se comportan similar a las clases*. Para crear una estructura en `c` lo que debemos hacer es usar el comandoa (?) struct:
+
+``` c
+struct nombreDeLaEstructura {
+  tipo_1 campo_1;
+  tipo_2 campo_2;
+}
+```
+
+Como ejemplo de implementacion podemos usar los numeros complejos:
+
+``` c
+struct complejo {
+  double real;
+  double im;
+}
+```
+
+O para almacenar la info de una persona:
+
+``` c
+struct persona {
+  char* nom;
+  char* rut;
+  int edad;
+  char genero;
+}
+```
+
+Cuando usamos las estructuras, su nombre correspondera al tipo precedido por `struct`, entonces si tomamos nuevamente el numero complejo para crear una variable deberiamos hacer:
+
+``` c
+struct complejo x;
+```
+
+Para inicializar variables, lo que tenemos que tomar es la variablecon anteponiendo `struct` al nombre y entre llaves implementamos los valores *en orden, donde de izquierda a derecha se va del campo 1 al n*. Esto es:
+
+``` c
+struct nombre x = {val_1, val_2};
+```
+
+Tomando nuevalemte le caso del numero complejo, para inicializar un numero como $1 + 3i = (2,3)$:
+
+``` c
+struct complejo x = {2, 3};
 ```
