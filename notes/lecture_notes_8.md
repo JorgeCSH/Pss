@@ -188,3 +188,11 @@ void main() {
   sumar(&x, y);
 }
 ```
+
+Para poder acceder a los campos, podemos usar otra forma mas abreviada llamada azucar sintactico (**nombre ql**) que es literalmente una flechita `->`, esto de esta forma:
+
+``` c
+// GIMME SOME SUGGAR
+(*x).campo;
+x -> campo;
+```
