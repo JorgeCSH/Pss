@@ -85,7 +85,26 @@ void printTree(Tree* root) {
 }
 
 char* maxValue(Tree* root) {
-  if ()
+  if (root = NULL) {
+    return ""; // Caso base vacio de emergencia.
+  }
+  if (root -> right == NULL) {
+    return root -> val; // Caso base, el maximo es el que no tiene hijo derecho.
+  } else {
+    return maxValue(root -> right); // Caso contrario para el otro maximo.
+  }
+}
+
+/* Analogo al maximo. */
+char* minValue(Tree* root) {
+  if (root == NULL) {
+    return "";
+  }
+  if (root -> left == NULL) {
+    return root -> val;
+  } else {
+    return minValue(root -> left);
+  }
 }
 
 ```
