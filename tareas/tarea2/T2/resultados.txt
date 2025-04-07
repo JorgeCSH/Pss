@@ -1,0 +1,7 @@
+Sistema operativo utilizado:
+Description:	Debian GNU/Linux 12 (bookworm)
+Versión del núcleo de linux:
+Linux autismusdebian 6.1.0-29-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.123-1 (2025-01-02) x86_64 GNU/Linux
+==== run-san ====
+gcc -g -DSAN=1 -fsanitize=address -fsanitize=undefined -DSANITIZE -Wall -Werror -pedantic -std=c18 -Wno-unused-function  test-invertir.c invertir.c test-util.c -lm -o invertir.bin-san
+./invertir.bin-san
