@@ -8,7 +8,7 @@
 void invertir(char* s) {
   /** Programe aqui la funcion invertir */
 
-  char *src = s, *dst = s;
+  char *src = s *dst = s;
   int hayEspacio = 1;
   while (*src != '\0') {
       if (*src != ' ') {
