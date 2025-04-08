@@ -70,6 +70,6 @@ Importante, a un puntero nulo no podemos acceder a ningun campo de la estructura
 Nodo *a = NULL // a -> val llevara a un segfault
 ```
 
-Con esto podemos ya empezar a trabajar con recursividad de estructuras.
+Con esto podemos ya empezar a trabajar con recursividad de estructuras, la cual incorporara punteros a punteros de estructuras.
 
 [^1]: Algoritmos reference.
