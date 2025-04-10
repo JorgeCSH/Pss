@@ -167,4 +167,30 @@ Nodo * aux = ptr;
 aux -> x;
 ```
 
+Este puntero opaco lo usaremos para generalizar mas las funciones. Para esto usaremos funciones que reciban el puntero opaco, donde como ejemplo, podemos tomar la funcion polinomio y esta queda de la forma:
+
+``` c
+typedef struct abc {
+  double a, b, c;
+}
+  
+// Funcion.
+double pol3(void *ptr, double x) {
+  abc*aux = ptr;
+  return aux -> a*x*x + aux -> b*x + aux -> c;
+} 
+
+// Redefinimos integral para usar los punteros.
+typedef double (*F)(void *ptr, double x);
+/* Nueva funcion integral */
+double integral3(F f, void *ptr, duble xi, double xf, int n) {
+  double h = (xf - xi)/2;
+  double sum = ((*f)(ptr, xi) + (*f)(ptr, xf))/2;
+  for (int i = 1; i < n; i++) {
+    sum += (*f)(ptr, xi + i*h);
+  }
+  return sum*h;
+}
+```
+
 [^1]: Ya no lo usamos pero lo vemos igual, se usa en sositos.
