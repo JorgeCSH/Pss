@@ -120,4 +120,51 @@ double pol2(double x) {
 integra(pol2, xi, xf, n);
 ```
 
+Mas aun, podemos definir una funcion `h` que haga el proceso:
+
+``` c
+// Opcion 1:
+double h(double a, double b, double c, double xi, double xf, int n) {
+  g_a = a;
+  g_b = b;
+  g_c = c;
+  return integral(pol2, xi, xf, n);
+}
+
+// Opcion 2:
+double h(Fun pol, double a, double b, double c, double xi, double xf, int n) {
+  g_a = a;
+  g_b = b;
+  g_c = c;
+  return integral(pol, xi, xf, n);
+}
+
+```
+
+Ahora, como ultima forma tendremos la opcion de utilizar punteros opacos (**si, recien xd**), puntero que se caracteriza por ser del tipo que nosotros queramos y que podemos usar a conveniencia. Este tipo de puntero esta dado por `(void *)` y sera del tipo de la variable a la que apunta (**?**). Este tipo de puntero no puede ser desreferenciado y no puede acceder a ningun campo de una estructura (*siendo qeu es la gracia del puntero apuntar a estas estructuras). Ejemplo:
+
+``` c
+// Puntero 
+void *ptr;
+
+// Aca lo asignamos a una variable que me sirva.
+// Creamos un puntero auxiliar que asignaremos de la variable al puntero opaco:
+int *aux = ptr;
+```
+
+Para el caso de estructuras tenemos que:
+
+``` c
+typedef struct nodo {
+  int x; 
+  struct nodo *prox;
+} Nodo;
+
+void * ptr;
+// Lo casteamos asociando a otro puntero, uno auxiliar.
+Nodo * aux = ptr;
+// De ahi se puede acceder a las componentes.
+aux -> x;
+```
+
 [^1]: Ya no lo usamos pero lo vemos igual, se usa en sositos.
