@@ -191,6 +191,15 @@ double integral3(F f, void *ptr, duble xi, double xf, int n) {
   }
   return sum*h;
 }
+
+double h2(double a,double b,double c,double xf,double xi, int n) {
+  Abc abc ={a, b, c};
+  return integral3(pol3, &abc, xi, xf, n);
+}
+
+double pol3(void *ptr, double x) {
+  Abc *aux = ptr;
+  return aux -> a*x*x + aux -> b*x + aux -> c;
 ```
 
 [^1]: Ya no lo usamos pero lo vemos igual, se usa en sositos.
