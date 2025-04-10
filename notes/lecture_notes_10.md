@@ -75,12 +75,49 @@ Para lo cual debemos crear una nueva funcion integral que reciba este parametro,
 
 ``` c
 /* Funcion que retorne la integral de toda funcion que tome cuatro 
-   cuatro doubles */
+   cuatro doubles, necesitamos tomar las variables del polinomio. */
 double integral2(Fun f, double a, double b, double c, double x1, double xf, int n) {
   double h = (xf - x1)/n;
   // Aca cambiamos la forma del llamado a la funcion.
-  double
+  double sum = ((*f)(a, b, c, xi) + (*f)(a, b, c, xf))/2;
+  for (int i = 1; i < n; i++) {
+    sum += (*f)(a, b, c, xi + i*h);
+  }
+  return sum*h;
 }
+```
+
+Ahora, esto puede ser aun mas generalizado, esto usando variables globales. Estas variables, definidas al inicio del codigo, son variables que existen desde su definicion hasta el termino de ejecucion de un codigo. Este tipo de variables se define como cualqueir otra variable:
+
+``` c
+// Variable global de nombre g_a
+double g_a;
+```
+
+Este tipo de variables hay que tratarlas con cuidado, dado a que ante cualquier cambio puede alterarse todo el codigo. Lo que en este caos cambia es la inicializacion, puesto a que no puede inicializarse con cualquier valor, pues solo puede inicializarse con valores constantes, es decir, no pueden inicializarse con valores de variables. Esto es:
+
+``` c
+// Valido, pues es una constante.
+double g_a = 10;
+
+// No valido, pues depende de otra variable, en este caso, g_a.
+double g_b = 2*g_a;
+```
+
+Indicacion, si se puede redefinir el valor en el codigo, esto siempre y cuando sea una constante. Este tipo de valores permite generalizar incluso mas las variables globales :
+
+``` c
+double g_a;
+double g_b;
+double g_c;
+
+// Podemos generalizar para solo tener que recibir un valor x.
+double pol2(double x) {
+  return g_a*x*x + g_b *x + g_c;
+}
+
+/* Ahora podemos usar solo la funcion integral del inicio */
+integra(pol2, xi, xf, n);
 ```
 
 [^1]: Ya no lo usamos pero lo vemos igual, se usa en sositos.
