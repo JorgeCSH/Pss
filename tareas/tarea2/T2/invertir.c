@@ -13,16 +13,18 @@ void invertir(char* s) {
   int unEspacio = 1;
   while (*sConEspacios != '\0') {
     if (*sConEspacios != ' ') {
-      *sSinEspacios++ = *sConEspacios;
+      *sSinEspacios = *sConEspacios;
+      sSinEspacios++;
       unEspacio = 0;
     } else if (!unEspacio) {
-      *sSinEspacios++ = ' ';
+      *sSinEspacios = ' ';
+      sSinEspacios++;
       unEspacio = 1;
     }
     sConEspacios++;
   }
 
-  char* auxUltimo = sSinEspacios;
+  char *auxUltimo = sSinEspacios;
   auxUltimo--;
   if (sSinEspacios > s && *auxUltimo == ' ') {
     sSinEspacios--;
@@ -76,16 +78,18 @@ char *invertido(char *s) {
   int unEspacio = 1;
   while (*sOriginal != '\0') {
       if (*sOriginal != ' ') {
-          *sNuevo++ = *sOriginal;
+          *sNuevo = *sOriginal;
+          sNuevo++;
           unEspacio = 0;
       } else if (!unEspacio) {
-          *sNuevo++ = ' ';
+          *sNuevo = ' ';
+          sNuevo++;
           unEspacio = 1;
       }
       sOriginal++;
   }
 
-  char* auxUltimoNuevo = sNuevo;
+  char *auxUltimoNuevo = sNuevo;
   auxUltimoNuevo--;
   if (sNuevo > sResultado && *auxUltimoNuevo == ' ') {
     sNuevo--;
