@@ -20,6 +20,7 @@ Nodo *extractMax(Nodo **pa) {
     }
 }
 
+
 Nodo *mezclar(Nodo **izq, Nodo **der) {
     if (*izq == NULL) {
         return *der;
