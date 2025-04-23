@@ -33,4 +33,24 @@ Nodo *mezclar(Nodo **izq, Nodo **der) {
 
 void elimIntervalo(Nodo **pa, int inf, int sup) {
   // Complete aqui la funcion pedida en el enunciado
+  Nodo *a = *pa;
+  if(a == NULL) {
+    return;
+  } else if ((a->id) < inf) {
+    elimIntervalo(&(a->der), inf, sup);
+    elimIntervalo(&(a->izq), inf, sup);
+  } else if((a->id) > sup) {
+    elimIntervalo(&(a->der), inf, sup);
+    elimIntervalo(&(a->izq), inf, sup);
+  } else {
+    elimIntervalo(&(a->izq), inf, sup);
+    elimIntervalo(&(a->der), inf, sup);
+    *pa = mezclar(&(a->izq), &(a->der));
+
+    
+  }
+
+
+    
+
 }
