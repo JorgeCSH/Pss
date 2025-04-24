@@ -34,25 +34,26 @@ char *reemplazo(char *s, char c, char *pal) {
     }
     contMem++;
   }
-  char *palOriginal = pal;
 
 
   char *sResultado = malloc(strlen(s) + strlen(pal)*iMem + 1);
   char *sNuevo = sResultado;
   while(*sOriginal != '\0') {
     if(*sOriginal == c) {
+      char *palOriginal = pal;
       while(*palOriginal != '\0') {
         *sNuevo = *palOriginal;
         sNuevo++;
         palOriginal++;
       }
-      palOriginal = palOriginal - strlen(pal);
+      sOriginal++;
     } else {
       *sNuevo = *sOriginal;
       sNuevo++;
       sOriginal++;
     }
   }
+
   *sNuevo = '\0';
   return sResultado;
 }
