@@ -38,7 +38,7 @@ Nota: las repetciones consecutivas de caracteres estan entre 1 y 9.
 Nota: `int x = 1; => x + '0'`.
 
 ``` c
-ull comprimir(char *s) {
+void comprimir(char *s) {
   // Programe aqui su funcion
 }
 ```
