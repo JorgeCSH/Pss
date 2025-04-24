@@ -2,41 +2,52 @@
 #include <string.h>
 
 void comprimir(char *s) {
-  char *sAux1 = s; 
-  char *sAux2 = s + 1;
+  char *saux1 = s; 
+  char *saux2 = s + 1;
   char *inicio = s;
   int i = 1;
 
-  while(*sAux2 != '\0') {
-    if (*sAux1 != *sAux2) {
+  while(*saux2 != '\0') {
+    if (*saux1 != *saux2) {
       if(i > 1) {
-        *inicio = 48+i; //ASCII 
+        *inicio = 48+i; //ascii 
         inicio++;
       }  
-      *inicio = *sAux1;
+      *inicio = *saux1;
       inicio++;
       i = 0;
     }
     i++;
-    sAux1++;
-    sAux2++;
+    saux1++;
+    saux2++;
   }
-  if(*sAux2 == '\0') {
-    char *sAux3 = sAux1;
-    sAux3--;
-    if (*sAux3 != *sAux1) {
-      *inicio = *sAux1;
+
+  if(*saux2 == '\0') {
+    char *saux3 = saux1;
+    int j = 1;
+    saux3--;
+    while (*saux3 == *saux1) {
+      j++;
+      saux3--;
+    }
+
+    if (j > 1) {
+      *inicio = 48 + j; //ascii 
       inicio++;
     }
+    *inicio = *saux1;
+    inicio++;
   }
   *inicio = '\0';
 }
 
 int main() {
   char s[] = "AABCCCD";
-  printf("s: %s\n  ", s);
+  char ss[] = "ABBAA";
   comprimir(s);
   printf("s: %s\n  ", s);
+  comprimir(ss);
+  printf("ss: %s\n  ", ss);
   return 0;
 
 }
