@@ -10,7 +10,7 @@ void comprimir(char *s) {
   while(*sAux2 != '\0') {
     if (*sAux1 != *sAux2) {
       if(i > 1) {
-        *inicio = i;
+        *inicio = 48+i; //ASCII 
         inicio++;
       }  
       *inicio = *sAux1;
