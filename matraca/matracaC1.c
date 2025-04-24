@@ -1,5 +1,7 @@
 #include <stdio.h>
-
+#include <stdlib.h>
+#include <string.h>
+/*
 typedef unsigned long long uint64;
 
 uint64 suma(uint64 x) {
@@ -18,8 +20,49 @@ uint64 suma(uint64 x) {
   return suma;
 }
 
+*/
+
+char *reemplazo(char *s, char c, char *pal) {
+  char *contMem = s;
+  char *sOriginal = s;
+
+  int iMem = 0;
+  while(*contMem != '\0') {
+    if(*contMem == c) {
+      iMem++;
+      printf("%d ", iMem);
+    }
+    contMem++;
+  }
+  char *palOriginal = pal;
+
+
+  char *sResultado = malloc(strlen(s) + strlen(pal)*iMem + 1);
+  char *sNuevo = sResultado;
+  while(*sOriginal != '\0') {
+    if(*sOriginal == c) {
+      while(*palOriginal != '\0') {
+        *sNuevo = *palOriginal;
+        sNuevo++;
+        palOriginal++;
+      }
+      palOriginal = palOriginal - strlen(pal);
+    } else {
+      *sNuevo = *sOriginal;
+      sNuevo++;
+      sOriginal++;
+    }
+  }
+  *sNuevo = '\0';
+  return sResultado;
+}
+
+
+
 int main() {
-  uint64 choripan = suma(0b00001001101011100011010010);
-  printf("\n suma(19, 6, 1):%llu ", choripan);
+  //uint64 choripan = suma(0b00001001101011100011010010);
+  //printf("\n suma(19, 6, 1):%llu ", choripan);
+  char *aaa = reemplazo("hola que tal", 'a', "xyz");
+  printf("\n%s resultado: ", aaa);
   return 0;
 }
