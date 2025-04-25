@@ -21,7 +21,7 @@ uint64 suma(uint64 x) {
 }
 
 */
-
+/*
 char *reemplazo(char *s, char c, char *pal) {
   char *contMem = s;
   char *sOriginal = s;
@@ -67,3 +67,80 @@ int main() {
   printf("\n%s resultado: ", aaa);
   return 0;
 }
+*/
+
+typedef struct nodo {
+  int x;
+  struct nodo *prox;
+} Nodo;
+
+
+void elimDup(Nodo *L) {
+  Nodo *a = L->prox;
+  if (a == NULL) {
+        return;
+  } else if (L->x != a->x) {
+    elimDup(a);  
+  } else {
+    L->prox = a->prox;
+    elimDup(L);  
+    free(a);
+  }
+}
+
+// Agrega un nodo al final de la lista
+void agregarFinal(Nodo **cabeza, int valor) {
+    Nodo *nuevo = (Nodo *)malloc(sizeof(Nodo));
+    nuevo->x = valor;
+    nuevo->prox = NULL;
+
+    if (*cabeza == NULL) {
+        *cabeza = nuevo;
+    } else {
+        Nodo *temp = *cabeza;
+        while (temp->prox != NULL)
+            temp = temp->prox;
+        temp->prox = nuevo;
+    }
+}
+
+// Imprime la lista
+void imprimirLista(Nodo *L) {
+    while (L != NULL) {
+        printf("%d ", L->x);
+        L = L->prox;
+    }
+    printf("\n");
+}
+
+// Libera toda la memoria de la lista
+void liberarLista(Nodo *L) {
+    Nodo *temp;
+    while (L != NULL) {
+        temp = L;
+        L = L->prox;
+        free(temp);
+    }
+}
+
+int main() {
+    Nodo *lista = NULL;
+
+    // Crear la lista: 7 7 9 3 3 3 7
+    int datos[] = {7, 7, 9, 3, 3, 3, 7};
+    for (int i = 0; i < sizeof(datos)/sizeof(datos[0]); i++) {
+        agregarFinal(&lista, datos[i]);
+    }
+
+    printf("Lista original:\n");
+    imprimirLista(lista);
+
+    elimDup(lista);
+
+    printf("Lista después de eliminar duplicados consecutivos:\n");
+    imprimirLista(lista);
+
+    liberarLista(lista);
+    return 0;
+}
+
