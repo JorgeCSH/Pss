@@ -68,7 +68,7 @@ int main() {
   return 0;
 }
 */
-
+/*
 typedef struct nodo {
   int x;
   struct nodo *prox;
@@ -143,4 +143,68 @@ int main() {
     liberarLista(lista);
     return 0;
 }
+*/
+#include <stdio.h>
 
+typedef unsigned long long ull;
+
+ull elimDup(ull x, ull y) {
+    // Calcular longitud de y en nibbles
+    int len_y = 0;
+    ull temp = y;
+    while (temp) {
+        temp = temp >> 4;
+        len_y = len_y + 1;
+    }
+
+    // Calcular longitud de x en nibbles
+    int len_x = 0;
+    temp = x;
+    while (temp) {
+        temp = temp >> 4;
+        len_x = len_x + 1;
+    }
+
+    // Procesar de izquierda a derecha (más significativo a menos)
+    ull resultado = 0;
+    int res_len = 0;
+
+    int i = len_x - 1;
+    while (i >= 0) {
+        // Verificar si hay coincidencia con y desde posición i-len_y+1 hasta i
+        if (i - len_y + 1 >= 0) {
+            ull segmento = 0;
+            for (int j = 0; j < len_y; j++) {
+                ull nibble = (x >> ((i - len_y + 1 + j) * 4)) & 0xF;
+                segmento = (segmento << 4) + nibble;
+            }
+
+            if (segmento == y) {
+                i = i - len_y; // saltamos la coincidencia
+                continue;
+            }
+        }
+
+        // Si no coincide, guardar el nibble actual
+        ull nibble = (x >> (i * 4)) & 0xF;
+        resultado = (resultado << 4) + nibble;
+        res_len = res_len + 1;
+        i = i - 1;
+    }
+
+    // Invertir resultado (porque fue construido al revés)
+    ull final = 0;
+    for (int j = 0; j < res_len; j++) {
+        ull nibble = (resultado >> (j * 4)) & 0xF;
+        final = (final << 4) + nibble;
+    }
+
+    return final;
+}
+
+int main() {
+    printf("0x%llx\n", elimDup(0x1c1c, 0x1c));        // 0x0
+    printf("0x%llx\n", elimDup(0x1c1c1, 0xc1c));      // 0x11
+    printf("0x%llx\n", elimDup(0x1c1c11, 0x1c1));     // 0x1c1
+    return 0;
+}
