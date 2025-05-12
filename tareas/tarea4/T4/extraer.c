@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
       }
       linea[17] = '\0';
 
-      char texto[10];
+      char texto[11];
       strncpy(texto, linea, 10);
       texto[10] = '\0';
 
