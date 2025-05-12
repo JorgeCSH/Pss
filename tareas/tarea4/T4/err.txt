@@ -1,1 +1,2 @@
+error: no-existe.txt esta vacia
 no-existe.txt: No such file or directory
