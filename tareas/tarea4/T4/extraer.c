@@ -5,75 +5,110 @@
 int main(int argc, char *argv[]) {
     if (argc != 2) {
         fprintf(stderr, "uso: %s archivo\n", argv[0]);
-        exit(1);
+        return 1;
     }
 
-    char *filename = argv[1];
-    FILE *f = fopen(filename, "r+");
-    if (f == NULL) {
-        printf("ssss \n");
-        perror(filename);
-        exit(1);
+    FILE *f = fopen(argv[1], "r+b");
+    if (!f) {
+        perror("error");
+        return 1;
     }
 
-    // Leer la cantidad de elementos desde el encabezado
-    char header[5] = {0}; // 4 caracteres + '\0'
-    if (fread(header, 1, 4, f) != 4) {
-        fprintf(stderr, "error: archivo mal formado\n");
+    // Leer los primeros 4 bytes para obtener el número de elementos
+    char buffer[16];
+    if (fread(buffer, 1, 4, f) != 4) {
+        fprintf(stderr, "error: no se pudo leer el tamaño\n");
         fclose(f);
-        exit(1);
+        return 1;
     }
+    buffer[4] = '\0';
+    int cantidad = atoi(buffer);
 
-    int n = atoi(header);
-    if (n <= 0) {
-        fprintf(stderr, "error: %s esta vacia\n", filename);
+    if (cantidad == 0) {
+        fprintf(stderr, "error: %s esta vacia\n", argv[1]);
         fclose(f);
-        exit(1);
+        return 1;
     }
 
-    long mejor_pos = -1;
-    int mejor_prio = 1000000;
-    char mejor_texto[11] = {0}; // 10 caracteres + '\0'
+    // Variables para mantener el mejor elemento
+    char mejor_texto[11];  // +1 para \0
+    int mejor_prioridad = 999999;
+    int mejor_indice = -1;
 
-    for (int i = 0; i < n; i++) {
-        fseek(f, 4 + 1 + i * 17, SEEK_SET); // posición del elemento i
-        char linea[17] = {0};
-        fread(linea, 1, 17, f);
+    for (int i = 0; i < cantidad; i++) {
+        // Calcular la posición del elemento i
+        long pos = 4 + 1 + i * 17;
+        if (fseek(f, pos, SEEK_SET) != 0) {
+            fprintf(stderr, "error: fseek fallo\n");
+            fclose(f);
+            return 1;
+        }
 
-        char texto[11] = {0}; // 10 caracteres + '\0'
-        char prioridad[7] = {0}; // 6 caracteres + '\0'
+        char linea[18];  // 17 + 1 para \0
+        if (fread(linea, 1, 17, f) != 17) {
+            fprintf(stderr, "error: lectura incompleta\n");
+            fclose(f);
+            return 1;
+        }
+        linea[17] = '\0';
 
-        memcpy(texto, linea, 10);
-        memcpy(prioridad, linea + 10, 6);
+        char texto[11];
+        strncpy(texto, linea, 10);
+        texto[10] = '\0';
 
-        int prio = atoi(prioridad);
+        char prioridad_str[7];
+        strncpy(prioridad_str, linea + 10, 6);
+        prioridad_str[6] = '\0';
+        int prioridad = atoi(prioridad_str);
 
-        if (prio < mejor_prio) {
-            mejor_prio = prio;
-            memcpy(mejor_texto, texto, 10);
-            mejor_pos = i;
+        if (prioridad < mejor_prioridad) {
+            mejor_prioridad = prioridad;
+            mejor_indice = i;
+            strncpy(mejor_texto, texto, 11);
         }
     }
 
-    // Imprimir exactamente 10 caracteres (con espacios si los tiene)
-    printf("%.*s\n", 10, mejor_texto);
+    // Mostrar el texto extraído (siempre 10 caracteres)
+    printf("%s\n", mejor_texto);
 
-    if (mejor_pos != n - 1) {
-        char ultima_linea[17] = {0};
-        fseek(f, 4 + 1 + (n - 1) * 17, SEEK_SET);
-        fread(ultima_linea, 1, 17, f);
+    // Leer el último elemento de la cola
+    long ultima_pos = 4 + 1 + (cantidad - 1) * 17;
+    if (mejor_indice != cantidad - 1) {
+        if (fseek(f, ultima_pos, SEEK_SET) != 0) {
+            fprintf(stderr, "error: fseek fallo al leer ultimo\n");
+            fclose(f);
+            return 1;
+        }
 
-        fseek(f, 4 + 1 + mejor_pos * 17, SEEK_SET);
-        fwrite(ultima_linea, 1, 17, f);
+        char ultimo[17];
+        if (fread(ultimo, 1, 17, f) != 17) {
+            fprintf(stderr, "error: no se pudo leer el ultimo\n");
+            fclose(f);
+            return 1;
+        }
+
+        // Escribir el último elemento en la posición del mejor
+        long mejor_pos = 4 + 1 + mejor_indice * 17;
+        if (fseek(f, mejor_pos, SEEK_SET) != 0) {
+            fprintf(stderr, "error: fseek fallo al escribir\n");
+            fclose(f);
+            return 1;
+        }
+        fwrite(ultimo, 1, 17, f);
     }
 
-    n--;
-    char nuevo_header[5] = {0};
-    sprintf(nuevo_header, "%-4d", n);
-    fseek(f, 0, SEEK_SET);
-    fwrite(nuevo_header, 1, 4, f);
+    // Actualizar la cantidad (en primera línea)
+    cantidad--;
+    if (fseek(f, 0, SEEK_SET) != 0) {
+        fprintf(stderr, "error: fseek al inicio fallo\n");
+        fclose(f);
+        return 1;
+    }
+    sprintf(buffer, "%-4d", cantidad);
+    fwrite(buffer, 1, 4, f);
 
     fclose(f);
     return 0;
 }
+
 
