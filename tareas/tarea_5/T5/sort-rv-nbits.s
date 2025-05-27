@@ -40,12 +40,42 @@ sort:                   # void sort(uint nums[], int n) { // registros a0, a1
     # en 0(sp), 4(sp), ... o 44(sp)
     # El valor de p esta temporalmente en el registro t0
     # No puede hacer mas trabajo que la comparacion (no puede usar ret)
-
+    /* 
     lw      a0,0(t0)    #     int a0= p[0];
     lw      a1,4(t0)    #     int a1= p[1];
     li      t1,0        #     int t1= 0;
     bgeu    a1,a0,.decision  # a0<=a1 equivale a a1>=a0
     li      t1,1        #     if (a0<=a1) t1= 1;
+    */
+
+    lw      a0, 0(t0) 
+    lw      a1, 4(t0)
+    li      t2, 0   
+    li      t3, 0  
+    mv      t4, a0
+    mv      t5, a1
+
+.t1_p0:
+    beq    t4, zero, .t1_p1
+    andi    t6, t4, 1
+    add     t2, t2, t6
+    srli    t4, t4, 1
+    j       .t1_p0
+
+.t1_p1:
+    beq    t5, zero, .comparar
+    andi    t6, t5, 1
+    add     t3, t3, t6
+    srli    t5, t5, 1
+    j       .t1_p1
+
+.comparar:
+    li      t1, 0
+    bgt     t3, t2, .mover
+    j       .decision
+
+.mover:
+    li      t1, 1
 
     # En el registro t1 debe quedar la conclusion de la comparacion:
     # si t1<=0 p[0] y p[1] estan en orden y no se intercambiaran.
