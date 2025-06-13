@@ -1,0 +1,80 @@
+Sistema operativo utilizado
+Description:	Debian GNU/Linux 12 (bookworm)
+Versión del núcleo de linux:
+Linux debian12 6.1.0-31-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.128-1 (2025-02-07) x86_64 GNU/Linux
+==== make sort-c-nbits.run ====
+/opt/riscv/bin/riscv64-unknown-elf-gcc -g -c -Wall -pedantic -std=c2x -march=rv32im -mabi=ilp32 sort-c-nbits.c -o sort-c-nbits.o
+/opt/riscv/bin/riscv64-unknown-elf-gcc -g -c -Wall -pedantic -std=c2x -march=rv32im -mabi=ilp32 test-sort.c -o test-sort.o
+/opt/riscv/bin/riscv64-unknown-elf-gcc -Wall -pedantic -std=c2x -march=rv32im -mabi=ilp32 -g sort-c-nbits.o test-sort.o  -o sort-c-nbits
+qemu-riscv32 sort-c-nbits
+Multiples tests con arreglos de solo 2 numeros
+Aprobado
+Ahora un arreglo de 12 numeros
+El arreglo desordenado es:
+--------------------------
+0b101010101010
+0b10101
+0b10
+0b11111111100000000000000000000000
+0b100110011101
+0b101
+0b10101010101010101010101010101010
+0b11111111111111111111111111111111
+0b10000000000000000000000001111111
+0b0
+0b11111
+0b111001
+
+El arreglo ordenado es:
+-----------------------
+0b11111111111111111111111111111111
+0b10101010101010101010101010101010
+0b11111111100000000000000000000000
+0b10000000000000000000000001111111
+0b100110011101
+0b101010101010
+0b11111
+0b111001
+0b10101
+0b101
+0b10
+0b0
+Felicitaciones: todos los tests aprobados
+==== make sort-rv-nbits.run ====
+/opt/riscv/bin/riscv64-unknown-elf-gcc -c -Wall -pedantic -std=c2x -march=rv32im -mabi=ilp32 sort-rv-nbits.s -o sort-rv-nbits.o
+/opt/riscv/bin/riscv64-unknown-elf-gcc -g -c -Wall -pedantic -std=c2x -march=rv32im -mabi=ilp32 test-sort.c -o test-sort.o
+/opt/riscv/bin/riscv64-unknown-elf-gcc -Wall -pedantic -std=c2x -march=rv32im -mabi=ilp32 -g sort-rv-nbits.o test-sort.o  -o sort-rv-nbits
+qemu-riscv32 sort-rv-nbits
+Multiples tests con arreglos de solo 2 numeros
+Aprobado
+Ahora un arreglo de 12 numeros
+El arreglo desordenado es:
+--------------------------
+0b101010101010
+0b10101
+0b10
+0b11111111100000000000000000000000
+0b100110011101
+0b101
+0b10101010101010101010101010101010
+0b11111111111111111111111111111111
+0b10000000000000000000000001111111
+0b0
+0b11111
+0b111001
+
+El arreglo ordenado es:
+-----------------------
+0b11111111111111111111111111111111
+0b10101010101010101010101010101010
+0b11111111100000000000000000000000
+0b10000000000000000000000001111111
+0b100110011101
+0b101010101010
+0b11111
+0b111001
+0b10101
+0b101
+0b10
+0b0
+Felicitaciones: todos los tests aprobados
