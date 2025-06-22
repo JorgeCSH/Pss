@@ -40,7 +40,7 @@ double integral_par(Funcion f, void *ptr, double xi, double xf, int n, int p) {
   /* Leer resultados padre y esperar terminar hijos. */
   for (int i = 0; i < p; i++) {
     double integ_paso;
-    read(fds[i][0], &integ_paso, sizeof(double));
+    leer(fds[i][0], &integ_paso, sizeof(double));
     close(fds[i][0]);
     integral_numerica += integ_paso;
     waitpid(pid[i], NULL, 0); 
