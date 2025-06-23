@@ -16,7 +16,7 @@ double integral_par(Funcion f, void *ptr, double xi, double xf, int n, int p) {
 
   /* Crear p pipes, uno por cada hijo. */
   for (int i = 0; i < p; i++) {
-    if (pipe(fd[i]) == -1) {
+    if (pipe(fds[i]) == -1) {
       perror("pipe");
       exit(1);
     }
@@ -30,19 +30,18 @@ double integral_par(Funcion f, void *ptr, double xi, double xf, int n, int p) {
       double paso = xi + i * h;
       double integ_paso = integral(f, ptr, paso, paso + h, trapecios);
       write(fds[i][1], &integ_paso, sizeof(double));
-      close(fds[i][1]);
       exit(0);
     } else {
       close(fds[i][1]);
     }
   }
 
-  /* Leer resultados padre y esperar terminar hijos. */
+  /* Leer resultados en padre. */
   for (int i = 0; i < p; i++) {
-    double integ_paso;
-    leer(fds[i][0], &integ_paso, sizeof(double));
+    double integ_paso_hijo;
+    leer(fds[i][0], &integ_paso_hijo, sizeof(double));
     close(fds[i][0]);
-    integral_numerica += integ_paso;
+    integral_numerica += integ_paso_hijo;
     waitpid(pid[i], NULL, 0); 
   }
 
