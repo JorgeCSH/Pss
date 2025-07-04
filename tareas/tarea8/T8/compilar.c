@@ -13,38 +13,65 @@
 #include "pss.h"
 
 // ... agregue aca las funciones y variables globales adicionales que necesite
-// Cola global
+
+/* NOTAS DE AUTOR:
+ * Actualmente me encuentro dando metodologias de diseno y programacion, donde 
+ * para docuementar en scala se usa un formato. Para este caso se me ocurrio
+ * incluir el analogo (llamado Doxygen) puesto a que me permite tanto:
+ * 1. Experimentar documentando en otros lenguajes.
+ * 2. Adaptarme a documentar mejor mis programas.
+ * Especificamente en c puesto a que...probablemente tome mas cursos/ramos
+ * que usen este lenguaje. Mis disculpas si no era la idea y me hago responsable
+ * de cualquier inconveniente que pueda signficar.
+ */
+
+/* Variables globales */
+// Variable global para la cola
 Queue *q;
 
-// Verifica si un archivo .c necesita compilarse
-int necesita_compilar(char *archivo_c) {
+/* Funciones */
+/** 
+ * @file compilar.c
+ * @brief Funcion la cual se encarga de verificar si el archivo esta 
+ * 	  o no compilado.
+ *
+ * @param archivo_c nombre del archivo en c (supuestamente terminado en .c) el cual se
+ * 		    verificara si esta o no compilado (si termina en .o).
+ *
+ * @return int entero de 0 o 1 analogo del booleano en "c".
+ */
+int verificar_compilar(char *archivo_c) {
+    // "Booleano" que corresponde al valor entregado.
+    int compilar = 0;
+    // Largo del nombre del archivo.
     int largo = strlen(archivo_c);
-
+    // Espacio de memoria que guardara el nombre del archivo para cambiarlo por .c o .o.
     char *archivo_o = malloc(largo + 1);
-    strcpy(archivo_o,archivo_c);
+    // Copiamos el nombre del archivo en c en el espacio en o.
+    strcpy(archivo_o, archivo_c);
+    // Cambiamos el "nombre" de la extension por .o.
     archivo_o[largo - 1] = 'o';  // reemplaza ".c" por ".o"
 
     struct stat st_c; 
     struct stat st_o;
-    int compilar = 0;
 
     if (stat(archivo_c, &st_c) != 0) {
         free(archivo_o);
         return 0;
     }
-
     if (stat(archivo_o, &st_o) != 0) {
         compilar = 1; // .o no existe
     } else if (st_c.st_mtime > st_o.st_mtime) {
         compilar = 1; // .c es más nuevo
     }
 
+    // Liberamos el espacio de memora del archivo .o.
     free(archivo_o);
     return compilar;
 }
 
 // Recorrido recursivo de directorios
-void recorrer(char *archivo) {
+void buscar(char *archivo) {
     DIR *dir = opendir(archivo);
     if (dir == NULL)
         return;
@@ -54,39 +81,50 @@ void recorrer(char *archivo) {
         if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0)
             continue;
 
-        char *path = malloc(strlen(archivo) + strlen(entry->d_name) + 2);
-        sprintf(path, "%s/%s", archivo, entry->d_name);
+        char *ruta = malloc(strlen(archivo) + strlen(entry->d_name) + 2);
+	strcpy(ruta, archivo);
+	size_t largo = strlen(ruta);
+	ruta[largo] = '/';
+	largo++;
+	char *nombre = entry->d_name;
 
-        struct stat st;
-        if (stat(path, &st) == 0) {
-            if (S_ISDIR(st.st_mode)) {
-                recorrer(path);
-            } else if (S_ISREG(st.st_mode) && necesita_compilar(path)) {
-                put(q, strdup(path));
+	while (*nombre != '\0') {
+	    ruta[largo] = *nombre;
+	    largo++;
+	    nombre++;
+	}
+
+	ruta[largo] = '\0';
+
+        struct stat st_buscar;
+        if (stat(ruta, &st_buscar) == 0) {
+            if (S_ISDIR(st_buscar.st_mode)) {
+                buscar(ruta);
+            } else if (S_ISREG(st_buscar.st_mode) && verificar_compilar(ruta)) {
+                put(q, strdup(ruta));
             }
         }
 
-        free(path);
+        free(ruta);
     }
 
     closedir(dir);
 }
 
 // Comparador para ordenar alfabéticamentrye
-int cmpStr(void *ptr, int i, int j) {
-    char **arr = ptr;
-    return strcmp(arr[i], arr[j]);
+int alfabetico(void *palabra, int i, int j) {
+    char **palabra_aux = palabra;
+    return strcmp(palabra_aux[i], palabra_aux[j]);
 }
 
 int main(int argc, char *argv[]) {
   // ... complete ...
     if (argc != 2) {
-        fprintf(stderr, "Uso: %s directorio\n", argv[0]);
         return 1;
     }
 
     q = makeQueue();
-    recorrer(argv[1]);
+    buscar(argv[1]);
 
     int n = queueLength(q);
     char **arr = malloc(n * sizeof(char *));
@@ -95,7 +133,7 @@ int main(int argc, char *argv[]) {
         arr[i] = get(q);
     }
 
-    sortPtrArray(arr, 0, n - 1, cmpStr);
+    sortPtrArray(arr, 0, n - 1, alfabetico);
 
     for (int i = 0; i < n; i++) {
         printf("%s\n", arr[i]);
