@@ -19,14 +19,13 @@ Queue *q;
 // Verifica si un archivo .c necesita compilarse
 int necesita_compilar(char *ruta_c) {
     int largo = strlen(ruta_c);
-    if (largo < 2 || strcmp(ruta_c + largo - 2, ".c") != 0)
-        return 0;
 
     char *ruta_o = malloc(largo + 1);
     strcpy(ruta_o, ruta_c);
     ruta_o[largo - 1] = 'o';  // reemplaza ".c" por ".o"
 
-    struct stat st_c, st_o;
+    struct stat st_c; 
+    struct stat st_o;
     int compilar = 0;
 
     if (stat(ruta_c, &st_c) != 0) {
@@ -50,13 +49,13 @@ void recorrer(char *ruta) {
     if (dir == NULL)
         return;
 
-    struct dirent *ent;
-    while ((ent = readdir(dir)) != NULL) {
-        if (strcmp(ent->d_name, ".") == 0 || strcmp(ent->d_name, "..") == 0)
+    struct dirent *entry;
+    while ((entry = readdir(dir)) != NULL) {
+        if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0)
             continue;
 
-        char *path = malloc(strlen(ruta) + strlen(ent->d_name) + 2);
-        sprintf(path, "%s/%s", ruta, ent->d_name);
+        char *path = malloc(strlen(ruta) + strlen(entry->d_name) + 2);
+        sprintf(path, "%s/%s", ruta, entry->d_name);
 
         struct stat st;
         if (stat(path, &st) == 0) {
@@ -73,7 +72,7 @@ void recorrer(char *ruta) {
     closedir(dir);
 }
 
-// Comparador para ordenar alfabéticamente
+// Comparador para ordenar alfabéticamentrye
 int cmpStr(void *ptr, int i, int j) {
     char **arr = ptr;
     return strcmp(arr[i], arr[j]);
