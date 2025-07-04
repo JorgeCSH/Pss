@@ -17,35 +17,35 @@
 Queue *q;
 
 // Verifica si un archivo .c necesita compilarse
-int necesita_compilar(char *ruta_c) {
-    int largo = strlen(ruta_c);
+int necesita_compilar(char *archivo_c) {
+    int largo = strlen(archivo_c);
 
-    char *ruta_o = malloc(largo + 1);
-    strcpy(ruta_o, ruta_c);
-    ruta_o[largo - 1] = 'o';  // reemplaza ".c" por ".o"
+    char *archivo_o = malloc(largo + 1);
+    strcpy(archivo_o,archivo_c);
+    archivo_o[largo - 1] = 'o';  // reemplaza ".c" por ".o"
 
     struct stat st_c; 
     struct stat st_o;
     int compilar = 0;
 
-    if (stat(ruta_c, &st_c) != 0) {
-        free(ruta_o);
+    if (stat(archivo_c, &st_c) != 0) {
+        free(archivo_o);
         return 0;
     }
 
-    if (stat(ruta_o, &st_o) != 0) {
+    if (stat(archivo_o, &st_o) != 0) {
         compilar = 1; // .o no existe
     } else if (st_c.st_mtime > st_o.st_mtime) {
         compilar = 1; // .c es más nuevo
     }
 
-    free(ruta_o);
+    free(archivo_o);
     return compilar;
 }
 
 // Recorrido recursivo de directorios
-void recorrer(char *ruta) {
-    DIR *dir = opendir(ruta);
+void recorrer(char *archivo) {
+    DIR *dir = opendir(archivo);
     if (dir == NULL)
         return;
 
@@ -54,8 +54,8 @@ void recorrer(char *ruta) {
         if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0)
             continue;
 
-        char *path = malloc(strlen(ruta) + strlen(entry->d_name) + 2);
-        sprintf(path, "%s/%s", ruta, entry->d_name);
+        char *path = malloc(strlen(archivo) + strlen(entry->d_name) + 2);
+        sprintf(path, "%s/%s", archivo, entry->d_name);
 
         struct stat st;
         if (stat(path, &st) == 0) {
