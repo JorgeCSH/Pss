@@ -22,47 +22,43 @@ Queue *q;
 // Funcion encargada de de verificar si un archivo debe ser o no compilado.
 int verificar_compilar(char *archivo_c) {
     int compilar = 0;
-    char *archivo_o = malloc(strlen(archivo_c)+ 1);
+    int largo = strlen(archivo_c);
+    char *archivo_o = malloc(largo + 1);
     struct stat st_c; 
     struct stat st_o;
     strcpy(archivo_o, archivo_c);
-    archivo_o[strlen(archivo_c) - 1] = 'o'; 
+    archivo_o[largo - 1] = 'o'; 
     if (stat(archivo_c, &st_c) != 0) {
-        free(archivo_o);
         compilar = 0;
-        return compilar;
     } else if (stat(archivo_o, &st_o) != 0 || st_c.st_mtime > st_o.st_mtime) {
-       compilar = 1; 
+        compilar = 1; 
     }
     free(archivo_o);
     return compilar;
 }
 
-// Funcion encargada de recorrer directorios de manera recursiva. 
+// Funcion encargada de recorrer directorios de manera recursiva. Inspirada en list-dir.c.
 void buscar(char *archivo) {
     DIR *dir = opendir(archivo);
-    struct dirent *entry;
-    while ((entry = readdir(dir)) != NULL) {
-        if ((strcmp(entry->d_name, ".") != 0) && (strcmp(entry -> d_name, "..") != 0)) {
-            char *ruta = malloc(strlen(archivo) + strlen(entry->d_name) + 2);
-            char *nombre = entry->d_name;
-            strcpy(ruta, archivo);
-            int largo = strlen(ruta);
-            ruta[largo] = '/';
-            largo++;
-            while (*nombre != '\0') {
-                ruta[largo] = *nombre;
-                largo++;
-                nombre++;
-            }
-            ruta[largo] = '\0';
-            struct stat st_buscar;
-            if (stat(ruta, &st_buscar) == 0) {
-                if (S_ISDIR(st_buscar.st_mode)) {
-                    buscar(ruta);
-                } else if (S_ISREG(st_buscar.st_mode) && verificar_compilar(ruta)) {
-                    put(q, strdup(ruta));
-               }
+    if (dir == NULL) {
+        perror(archivo);
+        exit(1);
+    }
+    for (struct dirent *entry = readdir(dir); entry != NULL; entry = readdir(dir)) {
+        if (strcmp(entry->d_name, ".") == 0 || strcmp(entry -> d_name, "..") == 0) {
+            continue;
+        }
+        char *ruta = malloc(strlen(archivo) + strlen(entry->d_name) + 2);
+        strcpy(ruta, archivo);
+        strcat(ruta, "/");
+        strcat(ruta, entry -> d_name);
+        struct stat st_buscar;
+        // Aca vemos si el archivo debe o no ser compilado.
+        if (stat(ruta, &st_buscar) == 0) {
+            if (S_ISDIR(st_buscar.st_mode)) {
+                buscar(ruta);
+            } else if (S_ISREG(st_buscar.st_mode) && verificar_compilar(ruta)) {
+                put(q, strdup(ruta));
             }
             free(ruta);
         }
