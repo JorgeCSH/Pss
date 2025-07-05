@@ -86,6 +86,5 @@ int main(int argc, char *argv[]) {
       free(cola_ordenar[i]);
   }
   free(cola_ordenar);
-  destroyQueue(q);
   return 0;
 }
