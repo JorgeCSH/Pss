@@ -22,12 +22,11 @@ Queue *q;
 // Funcion encargada de de verificar si un archivo debe ser o no compilado.
 int verificar_compilar(char *archivo_c) {
     int compilar = 0;
-    int largo = strlen(archivo_c);
-    char *archivo_o = malloc(largo + 1);
+    char *archivo_o = malloc(strlen(archivo_c) + 1);
     struct stat st_c; 
     struct stat st_o;
     strcpy(archivo_o, archivo_c);
-    archivo_o[largo - 1] = 'o'; 
+    archivo_o[strlen(archivo_o) - 1] = 'o'; 
     if (stat(archivo_c, &st_c) != 0) {
         compilar = 0;
     } else if (stat(archivo_o, &st_o) != 0 || st_c.st_mtime > st_o.st_mtime) {
@@ -66,7 +65,7 @@ void buscar(char *archivo) {
     closedir(dir);
 }
 
-// Comparador alfabetico. 
+// Comparador alfabetico (basado en ejemplo-sort.c). 
 int comparador_alfabetico(void *palabra, int i, int j) {
     char **palabra_aux = palabra;
     return strcmp(palabra_aux[i], palabra_aux[j]);
