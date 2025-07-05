@@ -15,7 +15,7 @@
 // ... agregue aca las funciones y variables globales adicionales que necesite
 
 /* Variables globales */
-// Variable global para la cola
+// Variable global para la cola (cola global).
 Queue *q;
 
 /* Funciones */
@@ -36,7 +36,7 @@ int verificar_compilar(char *archivo_c) {
     return compilar;
 }
 
-// Funcion encargada de recorrer directorios de manera recursiva. Inspirada en list-dir.c.
+// Funcion encargada de recorrer directorios de manera recursiva (inspirada en list-dir.c).
 void buscar(char *archivo) {
     DIR *dir = opendir(archivo);
     if (dir == NULL) {
@@ -76,16 +76,16 @@ int main(int argc, char *argv[]) {
   q = makeQueue();
   buscar(argv[1]);
   int largo_cola = queueLength(q);
-  char **arr = malloc(largo_cola * sizeof(char *));
+  char **cola_ordenar = malloc(largo_cola * sizeof(char *));
   for (int i = 0; i < largo_cola; i++) {
-      arr[i] = get(q);
+      cola_ordenar[i] = get(q);
   }
-  sortPtrArray(arr, 0, largo_cola - 1, comparador_alfabetico);
+  sortPtrArray(cola_ordenar, 0, largo_cola - 1, comparador_alfabetico);
   for (int i = 0; i < largo_cola; i++) {
-      printf("%s\n", arr[i]);
-      free(arr[i]);
+      printf("%s\n", cola_ordenar[i]);
+      free(cola_ordenar[i]);
   }
-  free(arr);
+  free(cola_ordenar);
   destroyQueue(q);
   return 0;
 }
