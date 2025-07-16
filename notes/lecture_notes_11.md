@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Catedra 11, 22 de abril
 
 ## Datos freak que parece deberian ser materia
@@ -60,8 +59,4 @@ FILE *f = fopen("hola.txt", "r+"); // entregando un puntero al primer caracter.
 3.3. El que probablemente ocupemos siempre, `size_t fread(void *ptr, size_t size, size_t nmemb, FILE *f)` donde `void *ptr` es el buffer (donde almacenamos lo que leemos), `FILE *f` es el puntero del archivo, `size_t size` tamaño de bytes de 1er elemento a leer y `size_t nmemb` la cantidad de bytes al leer, el cual falla cuando le paso una cantidad de diferente de bits a la que va a leer (leyendo menos bytes/caracteres de los que va a leer).
 
 [^1]: Gracias copilot.
-=======
-# Catedra 11, 22 de abril 
 
-##
->>>>>>> origin/develop_tarea_3
