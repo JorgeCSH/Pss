@@ -6,6 +6,7 @@ El repo contiene principalmente código hecho en `c` y en assembler `RISC-V`. Au
 
 ## Contenidos.
 - Desarrollos a tareas.
+- Apuntes de clases (no incluye todas las unidades).
 - Misc[^1].
 
 ## Adicional.
