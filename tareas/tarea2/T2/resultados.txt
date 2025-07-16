@@ -1,0 +1,126 @@
+Sistema operativo utilizado:
+Description:	Debian GNU/Linux 12 (bookworm)
+Versión del núcleo de linux:
+Linux autismusdebian 6.1.0-29-amd64 #1 SMP PREEMPT_DYNAMIC Debian 6.1.123-1 (2025-01-02) x86_64 GNU/Linux
+==== run-san ====
+gcc -g -DSAN=1 -fsanitize=address -fsanitize=undefined -DSANITIZE -Wall -Werror -pedantic -std=c18 -Wno-unused-function  test-invertir.c invertir.c test-util.c -lm -o invertir.bin-san
+./invertir.bin-san
+Tests unitarios
+----- Verificando funcion invertir ------
+Verificando con s = "the sky is blue"
+Verificando con s = "   hello   world    "
+Verificando con s = "the   sky is     blue  "
+Verificando con s = "       hello world!"
+Verificando con s = ""
+Verificando con s = " "
+Verificando con s = "     "
+Verificando con s = "  world  "
+----- Verificando funcion invertidos ------
+Verificando con s = "the sky is blue"
+Verificando con s = "   hello   world    "
+Verificando con s = "the   sky is     blue  "
+Verificando con s = "       hello world!"
+Verificando con s = ""
+Verificando con s = " "
+Verificando con s = "     "
+Verificando con s = "  world  "
+Test unitarios aprobados
+------------------------------------------
+Benchmark de invertir
+--------------------------------------------
+Verificando la correctitud de los resultados de invertir
+Ejecucion string enorme
+Tiempo de cpu: 9133 milisegundos
+------------------------------------------
+Benchmark de invertidos
+--------------------------------------------
+Verificando la correctitud de los resultados de invertir
+Ejecucion string enorme
+Tiempo de cpu: 9113 milisegundos
+Aprobado
+Felicitaciones: aprobo los tests de este modo de ejecucion
+==== run-g ====
+gcc -g -Wall -Werror -pedantic -std=c18 -Wno-unused-function  test-invertir.c invertir.c test-util.c -lm -o invertir.bin-g
+./invertir.bin-g
+Tests unitarios
+----- Verificando funcion invertir ------
+Verificando con s = "the sky is blue"
+Verificando con s = "   hello   world    "
+Verificando con s = "the   sky is     blue  "
+Verificando con s = "       hello world!"
+Verificando con s = ""
+Verificando con s = " "
+Verificando con s = "     "
+Verificando con s = "  world  "
+----- Verificando funcion invertidos ------
+Verificando con s = "the sky is blue"
+Verificando con s = "   hello   world    "
+Verificando con s = "the   sky is     blue  "
+Verificando con s = "       hello world!"
+Verificando con s = ""
+Verificando con s = " "
+Verificando con s = "     "
+Verificando con s = "  world  "
+Test unitarios aprobados
+------------------------------------------
+Benchmark de invertir
+--------------------------------------------
+Verificando la correctitud de los resultados de invertir
+Ejecucion string enorme
+Tiempo de cpu: 4192 milisegundos
+------------------------------------------
+Benchmark de invertidos
+--------------------------------------------
+Verificando la correctitud de los resultados de invertir
+Ejecucion string enorme
+Tiempo de cpu: 4200 milisegundos
+Aprobado
+Felicitaciones: aprobo los tests de este modo de ejecucion
+==== run ====
+gcc -O -DOPT=1 -Wall -Werror -pedantic -std=c18 -Wno-unused-function  test-invertir.c invertir.c test-util.c -lm -o invertir.bin
+Midiendo cuanto demora la solucion del profesor
+rm -f tiempo-ref.txt
+chmod +x prof.ref-x86_64
+./prof.ref-x86_64 ref > /dev/null
+Tiempos de referencia =  1646 1641
+Verificando y comparando con su solucion
+./invertir.bin 1646 1641
+Tests unitarios
+----- Verificando funcion invertir ------
+Verificando con s = "the sky is blue"
+Verificando con s = "   hello   world    "
+Verificando con s = "the   sky is     blue  "
+Verificando con s = "       hello world!"
+Verificando con s = ""
+Verificando con s = " "
+Verificando con s = "     "
+Verificando con s = "  world  "
+----- Verificando funcion invertidos ------
+Verificando con s = "the sky is blue"
+Verificando con s = "   hello   world    "
+Verificando con s = "the   sky is     blue  "
+Verificando con s = "       hello world!"
+Verificando con s = ""
+Verificando con s = " "
+Verificando con s = "     "
+Verificando con s = "  world  "
+Test unitarios aprobados
+Benchmarks
+------------------------------------------
+Benchmark de invertir
+--------------------------------------------
+Verificando la correctitud de los resultados de invertir
+Ejecucion string enorme
+Tiempo de cpu: 1743 milisegundos
+Tiempo de cpu de la version del profesor: 1646 milisegundos
+Porcentaje de sobrecosto: 5 %
+------------------------------------------
+Benchmark de invertidos
+--------------------------------------------
+Verificando la correctitud de los resultados de invertir
+Ejecucion string enorme
+Tiempo de cpu: 1757 milisegundos
+Tiempo de cpu de la version del profesor: 1646 milisegundos
+Porcentaje de sobrecosto: 6 %
+Benchmarks aprobados
+Felicitaciones: aprobo los tests de este modo de ejecucion
